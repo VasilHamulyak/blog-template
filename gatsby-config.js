@@ -37,6 +37,14 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-source-strapi",
+      options: {
+        apiURL: "http://localhost:1337",
+        queryLimit: 1000,
+        contentTypes: ["article", "author"],
+      },
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "gatsby-starter-default",
