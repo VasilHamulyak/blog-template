@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const autoprefixer = require("autoprefixer");
+const path = require("path");
 
 module.exports = {
   siteMetadata: {
@@ -26,6 +27,13 @@ module.exports = {
           camelCase: false,
         },
         postCssPlugins: [autoprefixer()],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        assets: path.join(__dirname, "src/assets"),
+        components: path.join(__dirname, "src/components"),
       },
     },
     {

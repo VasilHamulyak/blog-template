@@ -1,12 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 
 const IndexPage = () => (
-  <Layout>
+  <Fragment>
     <SEO title="Home" />
-  </Layout>
+  </Fragment>
 );
 
 export default IndexPage;
