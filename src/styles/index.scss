@@ -1,1 +1,12 @@
-@import './normalize.scss';
+@import "./normalize.scss";
+@import "./common.scss";
+
+/* import settings */
+@import "./settings/colors.scss";
+@import "./settings/z-indexes.scss";
+
+/* import tools */
+@import "./tools/mixins.scss";
+
+/* import components */
+@import "./components/header.scss";

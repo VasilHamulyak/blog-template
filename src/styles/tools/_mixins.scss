@@ -1,0 +1,95 @@
+/* mixin for Open Sans font-family */
+@mixin font($font-size, $line-height, $color, $font-weight: 400) {
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+  font-weight: $font-weight;
+}
+
+/* mixin for flex */
+@mixin flex($justify: null, $align: null, $direction: null, $wrap: null) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+/* enable hover only for device that allow */
+@mixin hover-supported {    
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+/* mixin for position absolute and fixed */
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+/* mixin for text truncate */
+@mixin truncate($line-clamp: 0, $line-height: 0, $full: false) {
+  @if $full {
+    overflow: hidden;
+    max-height: ($line-clamp * $line-height);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $line-clamp;
+    /*! autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+  } @else {
+    max-height: ($line-clamp * $line-height);
+    -webkit-line-clamp: $line-clamp;
+  }
+}
+
+/* mixin for create custom query */
+@mixin create-query($from) {
+  @media only screen and (min-width: $from) {
+    @content;
+  }
+}
+
+/* mixin for make media query 576px */
+@mixin screen-xs {
+  @media only screen and (min-width: 576px) { 
+    @content;
+  }
+}
+
+/* mixin for make media query 768px */
+@mixin screen-sm {
+  @media only screen and (min-width: 768px) { 
+    @content;
+  }
+}
+
+/* mixin for make media query 992px */
+@mixin screen-md {
+  @media only screen and (min-width: 992px) { 
+    @content;
+  }
+}
+
+/* mixin for make media query 1200px */
+@mixin screen-lg {
+  @media only screen and (min-width: 1200px) { 
+    @content;
+  }
+}
+
+@mixin create-wrapper ($max-width, $margin: 0 auto) {
+  max-width: $max-width;
+  margin: $margin;
+  padding: 0 20px;
+
+  @include screen-sm {
+    padding: 0 40px;
+  }
+}
