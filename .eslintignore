@@ -1,0 +1,5 @@
+#exclude eslint checker
+
+/node_modules
+/public
+/.catch
