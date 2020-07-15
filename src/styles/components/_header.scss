@@ -39,7 +39,7 @@
   }
 
   &__link {
-    @include font(16px, 100px, $dark-gray, 600);
+    @include font(16px, 97px, $dark-gray-color, 600);
     display: block;
     height: 100%;
   }

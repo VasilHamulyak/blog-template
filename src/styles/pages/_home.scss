@@ -1,0 +1,10 @@
+.banner {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 50%;
+  }
+}

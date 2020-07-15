@@ -1,0 +1,111 @@
+.slider {
+  width: 100%;
+  height: 100%;
+
+  &__button {
+    @include position(absolute, 45%);
+    display: none;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    transition: all 0.2s;
+    z-index: 20;
+    cursor: pointer;
+
+    @include screen-md {
+      display: block;
+    }
+  
+    & > i {
+      font-size: 22px;
+      line-height: 36px;
+      color: $white-color;
+      text-align: center;
+    }
+  
+    &--prev {
+      left: 0;
+    }
+  
+    &--next {
+      right: 0;
+    }
+  }
+
+  &__item {
+    @include position(absolute, 0, 0);
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  
+    &--is-shown {
+      opacity: 1;
+    }
+  
+    @include hover-supported {
+      .slide__content {
+        bottom: 0;
+      }
+    }
+  }
+
+  &__content {
+    @include position(absolute, $right: 0, $bottom: -58px, $left: 0);
+    @include flex($align: center, $direction: column);
+    width: 100%;
+    height: 176px;
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.8);;
+    transition: bottom 0.3s ease-out;
+  }
+
+  &__categories {
+    @include font(16px, 18px, $vivid-orange-color, 400);
+    position: relative;
+    margin: 0 10px;
+
+    &:before, &:after {
+      @include position(absolute, 43%);
+      content: '';
+      width: 25px;
+      height: 1px;
+      background-color: $vivid-orange-color;
+    }
+
+    &:before {
+      right: 130%;
+    }
+
+    &:after {
+      left: 130%;
+    }
+  }
+
+  &__title {
+    @include font(24px, 30px, $dark-color, 500);
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__publish-date {
+    @include font(12px, 14px, $dark-gray-color, 400);
+    font-style: italic;
+  }
+
+  &__link-button {
+    @include font(16px, 40px, $dark-gray-color, 500);
+    text-align: center;
+    width: 140px;
+    height: 40px;
+    margin-top: 16px;
+    border: 1px solid $dark-gray-color;
+    transition: all 0.3s ease-in;
+
+    @include hover-supported {
+      color: $white-color;
+      border-color: $vivid-orange-color;
+      background-color: $vivid-orange-color;
+    }
+  }
+}
