@@ -1,9 +1,38 @@
 import React, { Fragment } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
+import cn from "classnames";
 
 import SEO from "../components/Seo";
 import Slider from "components/Slider";
+
+const SOCIAL_LINKS = [
+  {
+    name: "Linkedin",
+    icon: "icon-linkedin",
+    link: "https://linkedin.com",
+  },
+  {
+    name: "YouTube",
+    icon: "icon-youtube-play",
+    link: "https://youtube.com",
+  },
+  {
+    name: "Facebook",
+    icon: "icon-facebook",
+    link: "https://facebook.com",
+  },
+  {
+    name: "Twitter",
+    icon: "icon-twitter",
+    link: "https://twitter.com",
+  },
+  {
+    name: "Instagram",
+    icon: "icon-instagram",
+    link: "https://instagram.com",
+  },
+];
 
 const IndexPage = ({ data }) => {
   const { sliderArticles, recentArticles } = data;
@@ -39,11 +68,36 @@ const IndexPage = ({ data }) => {
       </section>
       <section className="subscribes">
         <div className="subscribes__wrapper">
-          <h2>Sign up for Newsletters!</h2>
-          <h3>
+          <h2 className="subscribes__title">Sign up for Newsletters!</h2>
+          <h3 className="subscribes__subtitle">
             Receive weekly updates and early access to content so that you never
             miss out!
           </h3>
+          <form className="subscribes__form">
+            <input type="email" className="subscribes__input" />
+            <button className="subscribes__submit-button">Submit</button>
+          </form>
+          <div className="subscribes__social-networks">
+            {SOCIAL_LINKS.map(({ name, icon, link }) => (
+              <a
+                key={name}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "subscribes__network",
+                  `subscribes__network--${name.toLowerCase()}`
+                )}
+              >
+                <i className={icon} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="popular-articles">
+        <div className="section-title">
+          <h2>Popular articles</h2>
         </div>
       </section>
     </Fragment>
