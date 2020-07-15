@@ -65,7 +65,10 @@ function Slider({ slideList }) {
                 "slider__item--is-shown": slideIndex === index,
               })}
             >
-              <Img fluid={MediaSet.MainImage.childImageSharp.fluid} />
+              <Img
+                fluid={MediaSet.MainImage.childImageSharp.fluid}
+                alt={Title}
+              />
               <div className="slider__content">
                 <p className="slider__categories">{Categories}</p>
                 <Link to={`/blog/${URL}/`}>
