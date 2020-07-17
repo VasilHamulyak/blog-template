@@ -35,7 +35,7 @@ const SOCIAL_LINKS = [
 ];
 
 const IndexPage = ({ data }) => {
-  const { sliderArticles, recentArticles } = data;
+  const { sliderArticles, recentArticles, recommendedArticles } = data;
   return (
     <Fragment>
       <SEO title="Home" />
@@ -97,7 +97,26 @@ const IndexPage = ({ data }) => {
       </section>
       <section className="popular-articles">
         <div className="section-title">
-          <h2>Popular articles</h2>
+          <h2>Recommended articles</h2>
+        </div>
+        <div className="popular-articles__wrapper">
+          {recommendedArticles.nodes.map(
+            ({ id, Title, Categories, URL, ShortDescription, MediaSet }) => (
+              <div key={id} className="article-type">
+                <Link to={`/blog/${URL}/`} className="article-type__image">
+                  <Img
+                    fluid={MediaSet.SmallImage.childImageSharp.fluid}
+                    alt={Title}
+                  />
+                </Link>
+                <p className="article-type__categories">{Categories}</p>
+                <Link to={`/blog/${URL}/`} className="article-type__title">
+                  <h3>{Title}</h3>
+                </Link>
+                <p className="article-type__description">{ShortDescription}</p>
+              </div>
+            )
+          )}
         </div>
       </section>
     </Fragment>
@@ -152,6 +171,37 @@ export const data = graphql`
                 quality: 100
                 cropFocus: CENTER
                 srcSetBreakpoints: [320, 538]
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
+    recommendedArticles: allStrapiArticle(
+      filter: { Recommended: { eq: true } }
+      limit: 9
+    ) {
+      nodes {
+        URL
+        Title
+        id
+        PublishDate(formatString: "DD MMMM YYYY")
+        Categories
+        ShortDescription
+        Author {
+          FullName
+        }
+        MediaSet {
+          SmallImage {
+            childImageSharp {
+              fluid(
+                maxWidth: 538
+                maxHeight: 380
+                quality: 100
+                cropFocus: CENTER
+                srcSetBreakpoints: [320, 558]
               ) {
                 ...GatsbyImageSharpFluid_withWebp_noBase64
               }
