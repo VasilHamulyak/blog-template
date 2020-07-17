@@ -1,4 +1,125 @@
 .footer {
-  height: 400px;
-  background-color: #116979;
+  background-color: $dark-cyan-color;
+
+  &__wrapper {
+    @include create-wrapper(1200px, 0 auto);
+  }
+
+  &__top {
+    @include flex(space-between);
+    height: 200px;
+    padding: 40px 0;
+  }
+
+  &__bottom {
+    @include flex(space-between, center);
+    height: 100px;
+    border-top: 1px solid $white-color;
+  }
+}
+
+.contact {
+  @include flex($direction: column);
+
+  &__item {
+    @include flex($align: center);
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    @include font(16px, 20px, $white-color, 400);
+    margin-left: 10px;
+  }
+}
+
+.footer-icon {
+  @include flex(center, center);
+  width: 20px;
+  height: 20px;
+  color: $white-color;
+}
+
+.footer-logo {
+  @include font(24px, 24px, transparent, 700);
+  flex: 1;
+
+  :first-child {
+    color: $white-color;
+  }
+
+  :last-child {
+    color: $vivid-orange-color;
+  }
+}
+
+.footer-navigation {
+  min-width: 200px;
+  width: 200px;
+
+  &__item {
+    margin-bottom: 5px;
+  }
+
+  &__link {
+    @include font(16px, 16px, $white-color, 400);
+    transition: color 0.3s;
+
+    @include hover-supported {
+      color: $vivid-orange-color;
+    }
+  }
+}
+
+.copyright {
+  @include font(12px, 16px, $white-color, 400);
+}
+
+.social-networks {
+  @include flex(center);
+
+  &__item {
+    @include flex(center, center);
+    color: $white-color;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+  
+    &--linkedin {
+      @include hover-supported {
+        color: $linkedin-color;
+        background-color: $white-color;
+      }
+    }
+  
+    &--youtube {
+      @include hover-supported {
+        color: $youtube-color;
+        background-color: $white-color;
+      }
+    }
+  
+    &--facebook {
+      @include hover-supported {
+        color: $facebook-color;
+        background-color: $white-color;
+      }
+    }
+  
+    &--twitter {
+      @include hover-supported {
+        color: $twitter-color;
+        background-color: $white-color;
+      }
+    }
+  
+    &--instagram {
+      @include hover-supported {
+        color: $instagram-color;
+        background-color: $white-color;
+      }
+    }
+  }
 }

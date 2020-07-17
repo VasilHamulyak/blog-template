@@ -5,34 +5,7 @@ import cn from "classnames";
 
 import SEO from "../components/Seo";
 import Slider from "components/Slider";
-
-const SOCIAL_LINKS = [
-  {
-    name: "Linkedin",
-    icon: "icon-linkedin",
-    link: "https://linkedin.com",
-  },
-  {
-    name: "YouTube",
-    icon: "icon-youtube-play",
-    link: "https://youtube.com",
-  },
-  {
-    name: "Facebook",
-    icon: "icon-facebook",
-    link: "https://facebook.com",
-  },
-  {
-    name: "Twitter",
-    icon: "icon-twitter",
-    link: "https://twitter.com",
-  },
-  {
-    name: "Instagram",
-    icon: "icon-instagram",
-    link: "https://instagram.com",
-  },
-];
+import { SOCIAL_LINKS } from "../constants";
 
 const IndexPage = ({ data }) => {
   const { sliderArticles, recentArticles, recommendedArticles } = data;
@@ -201,7 +174,7 @@ export const data = graphql`
                 maxHeight: 380
                 quality: 100
                 cropFocus: CENTER
-                srcSetBreakpoints: [320, 558]
+                srcSetBreakpoints: [320, 358]
               ) {
                 ...GatsbyImageSharpFluid_withWebp_noBase64
               }

@@ -116,7 +116,7 @@
 .subscribes {
   height: 400px;
   padding: 40px;
-  background-color: #f5f5f5;
+  background-color: $light-gray-color;
 
   &__wrapper {
     @include create-wrapper(1200px, 0 auto);
@@ -173,41 +173,41 @@
     height: 40px;
     margin: 5px;
     padding: 5px;
-    background-color: #eeeeee;
+    background-color: $gray-color;
     transition: background-color 0.3s ease-out;
 
     &--linkedin {
       @include hover-supported {
         color: $white-color;
-        background-color: #0E72A3;
+        background-color: $linkedin-color;
       }
     }
 
     &--youtube {
       @include hover-supported {
         color: $white-color;
-        background-color: #F60001;
+        background-color: $youtube-color;
       }
     }
 
     &--facebook {
       @include hover-supported {
         color: $white-color;
-        background-color: #4064AC;
+        background-color: $facebook-color;
       }
     }
 
     &--twitter {
       @include hover-supported {
         color: $white-color;
-        background-color: #1C9CEA;
+        background-color: $twitter-color;
       }
     }
 
     &--instagram {
       @include hover-supported {
         color: $white-color;
-        background-color: #D62977;
+        background-color: $instagram-color;
       }
     }
   }
