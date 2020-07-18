@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import cn from "classnames";
 
-import SEO from "../components/Seo";
+import SEO from "components/Seo";
 import Paginate from "components/Paginate";
 import { SOCIAL_LINKS } from "../constants";
 

@@ -7,12 +7,18 @@ exports.createPages = async ({ actions, graphql }) => {
     {
       allStrapiArticle {
         totalCount
+        nodes {
+          id
+          URL
+        }
       }
     }
   `).then(res => {
     if (res.errors) return Promise.reject(res.errors);
 
     const articlesCount = res.data.allStrapiArticle.totalCount;
+
+    const posts = res.data.allStrapiArticle.nodes;
 
     const pageCount = Math.ceil(articlesCount / 4);
 
@@ -28,5 +34,15 @@ exports.createPages = async ({ actions, graphql }) => {
         },
       });
     });
+
+    posts.forEach(({ id, URL }) =>
+      createPage({
+        path: `/blog/${URL}/`,
+        component: path.resolve("src/templates/Post.js"),
+        context: {
+          postId: id,
+        },
+      })
+    );
   });
 };
