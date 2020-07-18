@@ -10,23 +10,40 @@ const Header = () => (
       </div>
       <nav className="navigation">
         <ul className="navigation__list">
-          <li className="navigation__item navigation__item--is-active">
-            <Link to="/" className="navigation__link">
+          <li className="navigation__item">
+            <Link
+              to="/"
+              className="navigation__link"
+              activeClassName="navigation__link--is-active"
+            >
               Home
             </Link>
           </li>
           <li className="navigation__item">
-            <Link to="/blog" className="navigation__link">
+            <Link
+              to="/blog/"
+              partiallyActive
+              className="navigation__link"
+              activeClassName="navigation__link--is-active"
+            >
               Blog
             </Link>
           </li>
           <li className="navigation__item">
-            <Link to="/about" className="navigation__link">
+            <Link
+              to="/about/"
+              className="navigation__link"
+              activeClassName="navigation__link--is-active"
+            >
               About
             </Link>
           </li>
           <li className="navigation__item">
-            <Link to="/contact" className="navigation__link">
+            <Link
+              to="/contact/"
+              className="navigation__link"
+              activeClassName="navigation__link--is-active"
+            >
               Contact
             </Link>
           </li>

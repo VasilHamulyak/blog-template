@@ -2,6 +2,7 @@
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "plugins": ["react", "react-hooks"],
   "env": {
+    "es6": true,
     "browser": true,
     "node": true
   },

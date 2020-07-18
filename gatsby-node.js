@@ -1,7 +1,32 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require("path");
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage } = actions;
+
+  return graphql(`
+    {
+      allStrapiArticle {
+        totalCount
+      }
+    }
+  `).then(res => {
+    if (res.errors) return Promise.reject(res.errors);
+
+    const articlesCount = res.data.allStrapiArticle.totalCount;
+
+    const pageCount = Math.ceil(articlesCount / 4);
+
+    Array.from({ length: pageCount }).forEach((_, i) => {
+      return createPage({
+        path: i === 0 ? "/blog/" : `/blog/${i + 1}/`,
+        component: path.resolve("src/templates/Blog.js"),
+        context: {
+          skip: 4 * i,
+          limit: 4,
+          pageCount,
+          currentPage: i + 1,
+        },
+      });
+    });
+  });
+};

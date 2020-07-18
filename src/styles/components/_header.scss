@@ -30,17 +30,17 @@
 
   &__item {
     margin: 0 10px;
-    padding: 0 15px;
-    border-bottom: 3px solid transparent;
-
-    &--is-active {
-      border-bottom-color: $vivid-orange-color;
-    }
   }
 
   &__link {
     @include font(16px, 97px, $dark-gray-color, 600);
     display: block;
     height: 100%;
+    padding: 0 15px;
+    border-bottom: 3px solid transparent;
+
+    &--is-active {
+      border-bottom-color: $vivid-orange-color;
+    }
   }
 }

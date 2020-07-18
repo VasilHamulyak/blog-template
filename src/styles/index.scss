@@ -12,7 +12,11 @@
 /* import pages */
 @import "./pages/home";
 
+/* import templates */
+@import "./templates/blog";
+
 /* import components */
 @import "./components/header";
 @import "./components/slider";
 @import "./components/footer";
+@import "./components/paginate";

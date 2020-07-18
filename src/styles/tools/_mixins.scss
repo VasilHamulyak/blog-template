@@ -34,19 +34,14 @@
 }
 
 /* mixin for text truncate */
-@mixin truncate($line-clamp: 0, $line-height: 0, $full: false) {
-  @if $full {
-    overflow: hidden;
-    max-height: ($line-clamp * $line-height);
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: $line-clamp;
-    /*! autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
-  } @else {
-    max-height: ($line-clamp * $line-height);
-    -webkit-line-clamp: $line-clamp;
-  }
+@mixin truncate($line-clamp: 1, $line-height: 0) {
+  overflow: hidden;
+  max-height: ($line-clamp * $line-height);
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-clamp;
+  /*! autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
 }
 
 /* mixin for create custom query */

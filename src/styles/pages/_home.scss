@@ -174,7 +174,7 @@
     margin: 5px;
     padding: 5px;
     background-color: $gray-color;
-    transition: background-color 0.3s ease-out;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
 
     &--linkedin {
       @include hover-supported {
@@ -222,7 +222,7 @@
 }
 
 .article-type {
-  flex-basis: 32%;
+  flex: 0 32%;
   margin-bottom: 30px;
 
   &__image {
@@ -272,6 +272,6 @@
 
   &__description {
     @include font(14px, 22px, $dark-gray-color, 400);
-    @include truncate(4, 22px, true);
+    @include truncate(4, 22px);
   }
 }

@@ -1,0 +1,42 @@
+.paginate {
+  margin: 30px auto;
+
+  &__list {
+    @include flex(space-between, center);
+    width: max-content;
+    margin: 0 auto;
+  }
+
+  &__item {
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+
+    &--is-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__link {
+    @include flex(center, center);
+    @include font(16px, 16px, $dark-gray-color, 600);
+    height: inherit;
+    background-color: $gray-color;
+    transition: all 0.3s ease-in-out;
+
+    @include hover-supported {
+      color: $white-color;
+      background-color: $vivid-orange-color;
+    }
+
+    &--prev, &--next {
+      font-size: 14px;
+    }
+
+    &--is-active {
+      color: $white-color;
+      background-color: $vivid-orange-color;
+    }
+  }
+}
