@@ -1,57 +1,52 @@
 import React, { Fragment } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
-import ReactMarkdown from "react-markdown";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import SEO from "components/Seo";
 
 function Post({ data }) {
   const {
-    Author,
-    Title,
-    Content,
-    Categories,
-    PublishDate,
-    MediaSet,
-  } = data.strapiArticle;
+    author,
+    title,
+    content,
+    category,
+    publishDate,
+    image,
+  } = data.contentfulArticle;
 
   return (
     <Fragment>
       <SEO title="Home" />
       <section className="post-banner">
         <div className="post-banner__wrapper">
-          <h1 className="post-banner__title">{Categories}</h1>
+          <h1 className="post-banner__title">{category}</h1>
           <div className="post-banner__breadcrumbs">
             <Link to="/">Home</Link>
             <span className="slash">/</span>
             <Link to="/blog/">Blog</Link>
             <span className="slash">/</span>
-            <span>{Title}</span>
+            <span>{title}</span>
           </div>
         </div>
       </section>
       <section className="post-image">
         <Img
-          fluid={MediaSet.SmallImage.childImageSharp.fluid}
-          alt={Title}
+          fluid={image.localFile.childImageSharp.fluid}
+          alt={title}
           style={{ width: "100%" }}
         />
       </section>
       <section className="post-header">
-        <h1 className="post-header__title">{Title}</h1>
+        <h1 className="post-header__title">{title}</h1>
         <div className="post-header__date-author">
-          {PublishDate}
+          {publishDate}
           <span>by</span>
-          {Author.FullName}
+          {author.fullName}
         </div>
       </section>
       <section className="post-content">
-        <ReactMarkdown
-          source={Content}
-          transformImageUri={uri =>
-            uri.startsWith("http") ? uri : `http://localhost:1337${uri}`
-          }
-        />
+        {documentToReactComponents(content.json)}
       </section>
     </Fragment>
   );
@@ -61,21 +56,18 @@ export default Post;
 
 export const data = graphql`
   query($postId: String!) {
-    strapiArticle(id: { eq: $postId }) {
-      Author {
-        FullName
-        Photo {
-          childImageSharp {
-            fixed {
-              src
-            }
-          }
-        }
+    contentfulArticle(id: { eq: $postId }) {
+      author {
+        fullName
       }
-      Categories
-      Content
-      MediaSet {
-        SmallImage {
+      category
+      content {
+        json
+      }
+      title
+      publishDate(formatString: "DD MMM YYYY")
+      image {
+        localFile {
           childImageSharp {
             fluid(
               maxWidth: 1200
@@ -89,8 +81,6 @@ export const data = graphql`
           }
         }
       }
-      Title
-      PublishDate(formatString: "DD MMM YYYY")
     }
   }
 `;

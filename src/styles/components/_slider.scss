@@ -61,7 +61,7 @@
     z-index: 10;
   }
 
-  &__categories {
+  &__category {
     @include font(16px, 18px, $vivid-orange-color, 400);
     position: relative;
     margin: 0 10px;

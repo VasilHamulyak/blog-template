@@ -2,6 +2,10 @@
 const autoprefixer = require("autoprefixer");
 const path = require("path");
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: "Blog example",
@@ -38,11 +42,12 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-strapi",
+      resolve: `gatsby-source-contentful`,
       options: {
-        apiURL: "http://localhost:1337",
-        queryLimit: 1000,
-        contentTypes: ["article", "author"],
+        spaceId: "z5tv0n7jwlkz",
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        host: process.env.CONTENTFUL_HOST,
+        downloadLocal: true,
       },
     },
     {

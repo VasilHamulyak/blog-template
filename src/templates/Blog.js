@@ -8,7 +8,7 @@ import Paginate from "components/Paginate";
 import { SOCIAL_LINKS } from "../constants";
 
 const Blog = ({
-  data: { allStrapiArticle, recentArticles },
+  data: { allContentfulArticle, recentArticles },
   pageContext: { pageCount, currentPage },
 }) => (
   <Fragment>
@@ -27,21 +27,21 @@ const Blog = ({
       <div className="blog-page-content__wrapper">
         <div className="blog-page-content__articles">
           <div className="blog-page-content__articles-list">
-            {allStrapiArticle.nodes.map(
-              ({ id, Title, Categories, URL, ShortDescription, MediaSet }) => (
+            {allContentfulArticle.nodes.map(
+              ({ id, title, category, URL, shortDescription, image }) => (
                 <div key={id} className="article-type">
                   <Link to={`/blog/${URL}/`} className="article-type__image">
                     <Img
-                      fluid={MediaSet.SmallImage.childImageSharp.fluid}
-                      alt={Title}
+                      fluid={image.localFile.childImageSharp.fluid}
+                      alt={title}
                     />
                   </Link>
-                  <p className="article-type__categories">{Categories}</p>
+                  <p className="article-type__categories">{category}</p>
                   <Link to={`/blog/${URL}/`} className="article-type__title">
-                    <h3>{Title}</h3>
+                    <h3>{title}</h3>
                   </Link>
                   <p className="article-type__description">
-                    {ShortDescription}
+                    {shortDescription.shortDescription}
                   </p>
                 </div>
               )
@@ -80,22 +80,22 @@ const Blog = ({
           <ul className="recent-post">
             <li className="recent-post__title">Recent post</li>
             {recentArticles.nodes.map(
-              ({ id, Title, URL, PublishDate, Author, MediaSet }) => (
+              ({ id, title, URL, publishDate, author, image }) => (
                 <li key={id} className="recent-post__item">
                   <Link to={`/blog/${URL}/`}>
                     <Img
-                      fluid={MediaSet.SmallImage.childImageSharp.fluid}
-                      alt={Title}
+                      fluid={image.localFile.childImageSharp.fluid}
+                      alt={title}
                     />
                   </Link>
                   <div>
                     <Link to={`/blog/${URL}/`} className="recent-post__link">
-                      {Title}
+                      {title}
                     </Link>
                     <p className="recent-post__date-author">
-                      {PublishDate}
+                      {publishDate}
                       <span>by</span>
-                      {Author.FullName}
+                      {author.fullName}
                     </p>
                   </div>
                 </li>
@@ -136,21 +136,22 @@ export default Blog;
 
 export const data = graphql`
   query($skip: Int!, $limit: Int!) {
-    allStrapiArticle(
-      sort: { fields: PublishDate, order: DESC }
+    allContentfulArticle(
+      sort: { fields: publishDate, order: DESC }
       skip: $skip
       limit: $limit
     ) {
-      totalCount
       nodes {
         URL
-        Title
+        title
         id
-        PublishDate(formatString: "DD MMMM YYYY")
-        Categories
-        ShortDescription
-        MediaSet {
-          SmallImage {
+        publishDate(formatString: "DD MMMM YYYY")
+        category
+        shortDescription {
+          shortDescription
+        }
+        image {
+          localFile {
             childImageSharp {
               fluid(
                 maxWidth: 538
@@ -166,20 +167,20 @@ export const data = graphql`
         }
       }
     }
-    recentArticles: allStrapiArticle(
-      sort: { fields: PublishDate, order: DESC }
+    recentArticles: allContentfulArticle(
+      sort: { fields: publishDate, order: DESC }
       limit: 3
     ) {
       nodes {
         URL
-        Title
+        title
         id
-        PublishDate(formatString: "DD MMMM YYYY")
-        Author {
-          FullName
+        publishDate(formatString: "DD MMMM YYYY")
+        author {
+          fullName
         }
-        MediaSet {
-          SmallImage {
+        image {
+          localFile {
             childImageSharp {
               fluid(
                 maxWidth: 538

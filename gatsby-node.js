@@ -5,7 +5,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allStrapiArticle {
+      allContentfulArticle {
         totalCount
         nodes {
           id
@@ -16,9 +16,9 @@ exports.createPages = async ({ actions, graphql }) => {
   `).then(res => {
     if (res.errors) return Promise.reject(res.errors);
 
-    const articlesCount = res.data.allStrapiArticle.totalCount;
+    const articlesCount = res.data.allContentfulArticle.totalCount;
 
-    const posts = res.data.allStrapiArticle.nodes;
+    const posts = res.data.allContentfulArticle.nodes;
 
     const pageCount = Math.ceil(articlesCount / 4);
 

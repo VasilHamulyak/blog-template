@@ -23,16 +23,16 @@ const IndexPage = ({ data }) => {
         </div>
         <div className="recent-articles__wrapper">
           {recentArticles.nodes.map(
-            ({ id, Title, Categories, URL, PublishDate, MediaSet }) => (
+            ({ id, title, category, URL, publishDate, image }) => (
               <Link key={id} to={`/blog/${URL}/`} className="article">
-                <p className="article__categories">{Categories}</p>
+                <p className="article__categories">{category}</p>
                 <Img
-                  fluid={MediaSet.SmallImage.childImageSharp.fluid}
-                  alt={Title}
+                  fluid={image.localFile.childImageSharp.fluid}
+                  alt={title}
                 />
                 <div className="article__content">
-                  <h3 className="article__title">{Title}</h3>
-                  <p className="article__date">{PublishDate}</p>
+                  <h3 className="article__title">{title}</h3>
+                  <p className="article__date">{publishDate}</p>
                 </div>
               </Link>
             )
@@ -74,19 +74,21 @@ const IndexPage = ({ data }) => {
         </div>
         <div className="popular-articles__wrapper">
           {recommendedArticles.nodes.map(
-            ({ id, Title, Categories, URL, ShortDescription, MediaSet }) => (
+            ({ id, title, category, URL, shortDescription, image }) => (
               <div key={id} className="article-type">
                 <Link to={`/blog/${URL}/`} className="article-type__image">
                   <Img
-                    fluid={MediaSet.SmallImage.childImageSharp.fluid}
-                    alt={Title}
+                    fluid={image.localFile.childImageSharp.fluid}
+                    alt={title}
                   />
                 </Link>
-                <p className="article-type__categories">{Categories}</p>
+                <p className="article-type__categories">{category}</p>
                 <Link to={`/blog/${URL}/`} className="article-type__title">
-                  <h3>{Title}</h3>
+                  <h3>{title}</h3>
                 </Link>
-                <p className="article-type__description">{ShortDescription}</p>
+                <p className="article-type__description">
+                  {shortDescription.shortDescription}
+                </p>
               </div>
             )
           )}
@@ -100,22 +102,24 @@ export default IndexPage;
 
 export const data = graphql`
   query {
-    sliderArticles: allStrapiArticle(
-      filter: { AddToHomeSlider: { eq: true } }
+    sliderArticles: allContentfulArticle(
+      filter: { addToHomeSlider: { eq: true } }
     ) {
       nodes {
         URL
-        Title
         id
-        PublishDate(formatString: "DD MMM YYYY")
-        Categories
-        MediaSet {
-          MainImage {
+        addToHomeSlider
+        category
+        publishDate(formatString: "DD MMM YYYY")
+        title
+        image {
+          localFile {
             childImageSharp {
               fluid(
                 maxWidth: 1200
                 maxHeight: 600
                 quality: 100
+                cropFocus: CENTER
                 srcSetBreakpoints: [320, 768, 992, 1200]
               ) {
                 ...GatsbyImageSharpFluid_withWebp_noBase64
@@ -125,22 +129,22 @@ export const data = graphql`
         }
       }
     }
-    recentArticles: allStrapiArticle(
-      sort: { fields: PublishDate, order: DESC }
+    recentArticles: allContentfulArticle(
+      sort: { fields: publishDate, order: DESC }
       limit: 4
     ) {
       nodes {
         URL
-        Title
         id
-        PublishDate(formatString: "DD MMMM YYYY")
-        Categories
-        MediaSet {
-          SmallImage {
+        addToHomeSlider
+        category
+        publishDate(formatString: "DD MMM YYYY")
+        title
+        image {
+          localFile {
             childImageSharp {
               fluid(
                 maxWidth: 538
-                maxHeight: 380
                 quality: 100
                 cropFocus: CENTER
                 srcSetBreakpoints: [320, 538]
@@ -152,26 +156,24 @@ export const data = graphql`
         }
       }
     }
-    recommendedArticles: allStrapiArticle(
-      filter: { Recommended: { eq: true } }
+    recommendedArticles: allContentfulArticle(
+      filter: { recommended: { eq: true } }
       limit: 9
     ) {
       nodes {
         URL
-        Title
         id
-        PublishDate(formatString: "DD MMMM YYYY")
-        Categories
-        ShortDescription
-        Author {
-          FullName
+        category
+        title
+        shortDescription {
+          shortDescription
         }
-        MediaSet {
-          SmallImage {
+        image {
+          localFile {
             childImageSharp {
               fluid(
-                maxWidth: 538
-                maxHeight: 380
+                maxWidth: 358
+                maxHeight: 254
                 quality: 100
                 cropFocus: CENTER
                 srcSetBreakpoints: [320, 358]

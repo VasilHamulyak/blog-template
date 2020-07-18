@@ -58,23 +58,20 @@ function Slider({ slideList }) {
       )}
       <Swipeable onSwipedLeft={() => onPrev()} onSwipedRight={() => onNext()}>
         {slideList.map(
-          ({ id, Title, Categories, URL, PublishDate, MediaSet }, index) => (
+          ({ id, title, category, URL, publishDate, image }, index) => (
             <div
               key={id}
               className={cn("slider__item", {
                 "slider__item--is-shown": slideIndex === index,
               })}
             >
-              <Img
-                fluid={MediaSet.MainImage.childImageSharp.fluid}
-                alt={Title}
-              />
+              <Img fluid={image.localFile.childImageSharp.fluid} alt={title} />
               <div className="slider__content">
-                <p className="slider__categories">{Categories}</p>
+                <p className="slider__category">{category}</p>
                 <Link to={`/blog/${URL}/`}>
-                  <h2 className="slider__title">{Title}</h2>
+                  <h2 className="slider__title">{title}</h2>
                 </Link>
-                <p className="slider__publish-date">{PublishDate}</p>
+                <p className="slider__publish-date">{publishDate}</p>
                 <Link to={`/blog/${URL}/`} className="slider__link-button">
                   Read more
                 </Link>
