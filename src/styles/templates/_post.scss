@@ -134,3 +134,23 @@
     padding: 0 30px;
   }
 }
+
+.embedded-asset {
+  margin-top: 56px;
+
+  &__image {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  &__caption {
+    @include font(14px, 24px, $dark-gray-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+}
+
+.embedded-entry {
+  margin-top: 56px;
+}

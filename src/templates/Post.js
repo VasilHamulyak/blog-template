@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
+import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
+import useContentfulAsset from "../hooks/useContentfulAsset";
 import SEO from "components/Seo";
 
 function Post({ data }) {
@@ -14,6 +16,35 @@ function Post({ data }) {
     publishDate,
     image,
   } = data.contentfulArticle;
+
+  const options = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: node => {
+        const { sys } = node.data.target;
+        console.log("3OedRNpnUF77Espk7XHkTs", sys.id);
+        const { localFile, title, description } = useContentfulAsset(
+          sys.contentful_id
+        );
+
+        return (
+          <figure className="embedded-asset">
+            <img
+              className="embedded-asset__image"
+              src={localFile.childImageSharp.original.src}
+              alt={title}
+            />
+            {description && (
+              <figcaption className="embedded-asset__caption">
+                {description}
+              </figcaption>
+            )}
+          </figure>
+        );
+      },
+    },
+  };
+
+  console.log(content);
 
   return (
     <Fragment>
@@ -46,7 +77,7 @@ function Post({ data }) {
         </div>
       </section>
       <section className="post-content">
-        {documentToReactComponents(content.json)}
+        {documentToReactComponents(content.json, options)}
       </section>
     </Fragment>
   );
