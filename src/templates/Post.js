@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import useContentfulAsset from "../hooks/useContentfulAsset";
 import SEO from "components/Seo";
+import Breadcrumb from "components/Breadcrumb";
 
 function Post({ data }) {
   const {
@@ -21,7 +22,6 @@ function Post({ data }) {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {
         const { sys } = node.data.target;
-        console.log("3OedRNpnUF77Espk7XHkTs", sys.id);
         const { localFile, title, description } = useContentfulAsset(
           sys.contentful_id
         );
@@ -44,21 +44,19 @@ function Post({ data }) {
     },
   };
 
-  console.log(content);
-
   return (
     <Fragment>
       <SEO title="Home" />
       <section className="post-banner">
         <div className="post-banner__wrapper">
           <h1 className="post-banner__title">{category}</h1>
-          <div className="post-banner__breadcrumbs">
-            <Link to="/">Home</Link>
-            <span className="slash">/</span>
-            <Link to="/blog/">Blog</Link>
-            <span className="slash">/</span>
-            <span>{title}</span>
-          </div>
+          <Breadcrumb
+            pathArr={[
+              { path: "/", label: "Home" },
+              { path: "/blog/", label: "Blog" },
+            ]}
+            crumbLabel={title}
+          />
         </div>
       </section>
       <section className="post-image">

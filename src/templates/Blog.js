@@ -5,6 +5,7 @@ import cn from "classnames";
 
 import SEO from "components/Seo";
 import Paginate from "components/Paginate";
+import Breadcrumb from "components/Breadcrumb";
 import { SOCIAL_LINKS } from "../constants";
 
 const Blog = ({
@@ -16,11 +17,10 @@ const Blog = ({
     <section className="blog-page-banner">
       <div className="blog-page-banner__wrapper">
         <h1 className="blog-page-banner__title">Our Blog</h1>
-        <div className="blog-page-banner__breadcrumbs">
-          <Link to="/">Home</Link>
-          <span className="slash">/</span>
-          <span>Blog</span>
-        </div>
+        <Breadcrumb
+          pathArr={[{ path: "/", label: "Home" }]}
+          crumbLabel="Blog"
+        />
       </div>
     </section>
     <section className="blog-page-content">

@@ -1,0 +1,11 @@
+.breadcrumb {
+  @include font(14px, 14px, $white-color, 400);
+  
+  &__item {
+    color: inherit;
+  }
+
+  &__divider {
+    margin: 0 10px;
+  }
+}
