@@ -15,22 +15,22 @@ const Footer = () => (
         <nav className="footer-navigation">
           <ul className="footer-navigation__list">
             <li className="footer-navigation__item">
-              <Link to="/travel" className="footer-navigation__link">
+              <Link to="/category/travel/" className="footer-navigation__link">
                 Travel
               </Link>
             </li>
             <li className="footer-navigation__item">
-              <Link to="/health" className="footer-navigation__link">
+              <Link to="/category/health/" className="footer-navigation__link">
                 Health
               </Link>
             </li>
             <li className="footer-navigation__item">
-              <Link to="/food" className="footer-navigation__link">
+              <Link to="/category/food/" className="footer-navigation__link">
                 Food
               </Link>
             </li>
             <li className="footer-navigation__item">
-              <Link to="/fitness" className="footer-navigation__link">
+              <Link to="/category/fitness/" className="footer-navigation__link">
                 Fitness
               </Link>
             </li>

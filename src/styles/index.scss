@@ -15,6 +15,7 @@
 /* import templates */
 @import "./templates/blog";
 @import "./templates/post";
+@import "./templates/category";
 
 /* import components */
 @import "./components/header";
@@ -22,3 +23,4 @@
 @import "./components/footer";
 @import "./components/paginate";
 @import "./components/breadcrumb";
+@import "./components/aside";

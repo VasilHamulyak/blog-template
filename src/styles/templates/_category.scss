@@ -1,4 +1,4 @@
-.blog-page-banner {
+.category-page-banner {
   height: 150px;
   background-color: $dark-cyan-color;
 
@@ -13,7 +13,7 @@
   }
 }
 
-.blog-page-content {
+.category-page-content {
   @include create-wrapper(1200px, 60px auto);
 
   &__wrapper {

@@ -11,18 +11,6 @@
   &__title {
     @include font(30px, 30px, $white-color, 600);
   }
-
-  &__breadcrumbs {
-    @include font(14px, 14px, $white-color, 400);
-
-    & > a {
-      color: inherit;
-    }
-  }
-}
-
-.slash {
-  margin: 0 10px;
 }
 
 .post-image {
@@ -70,7 +58,7 @@
   }
 
   p {
-    @include font(16px, 24px, $dark-gray-color);
+    @include font(16px, 26px, $dark-gray-color);
     margin: 32px 0 -10px 0;
   }
 

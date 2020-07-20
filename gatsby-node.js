@@ -1,4 +1,5 @@
 const path = require("path");
+const { slugify } = require("./src/shared/slugify");
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -10,6 +11,7 @@ exports.createPages = async ({ actions, graphql }) => {
         nodes {
           id
           URL
+          category
         }
       }
     }
@@ -19,6 +21,27 @@ exports.createPages = async ({ actions, graphql }) => {
     const articlesCount = res.data.allContentfulArticle.totalCount;
 
     const posts = res.data.allContentfulArticle.nodes;
+
+    const categories = posts.map(({ category }) => category);
+
+    const categoriesPostCount = Object.entries(
+      categories.reduce((categories, category) => {
+        categories[category] = categories[category] || 0;
+        categories[category] = categories[category] + 1;
+        return categories;
+      }, {})
+    ).map(([label, count]) => ({ label, count }));
+
+    categories.forEach(category =>
+      createPage({
+        path: `/category/${slugify(category)}/`,
+        component: path.resolve("src/templates/Category.js"),
+        context: {
+          category,
+          categoriesPostCount,
+        },
+      })
+    );
 
     const pageCount = Math.ceil(articlesCount / 4);
 
@@ -31,6 +54,7 @@ exports.createPages = async ({ actions, graphql }) => {
           limit: 4,
           pageCount,
           currentPage: i + 1,
+          categoriesPostCount,
         },
       });
     });

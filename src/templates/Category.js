@@ -3,29 +3,29 @@ import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 
 import SEO from "components/Seo";
-import Paginate from "components/Paginate";
+// import Paginate from "components/Paginate";
 import Aside from "components/Aside";
 import Breadcrumb from "components/Breadcrumb";
 
-const Blog = ({
+const Category = ({
   data: { allContentfulArticle, recentArticles },
-  pageContext: { pageCount, currentPage, categoriesPostCount },
+  pageContext: { category, categoriesPostCount },
 }) => (
   <Fragment>
     <SEO title="Home" />
-    <section className="blog-page-banner">
-      <div className="blog-page-banner__wrapper">
-        <h1 className="blog-page-banner__title">Our Blog</h1>
+    <section className="category-page-banner">
+      <div className="category-page-banner__wrapper">
+        <h1 className="category-page-banner__title">{category}</h1>
         <Breadcrumb
           pathArr={[{ path: "/", label: "Home" }]}
-          crumbLabel="Blog"
+          crumbLabel={category}
         />
       </div>
     </section>
-    <section className="blog-page-content">
-      <div className="blog-page-content__wrapper">
-        <div className="blog-page-content__articles">
-          <div className="blog-page-content__articles-list">
+    <section className="category-page-content">
+      <div className="category-page-content__wrapper">
+        <div className="category-page-content__articles">
+          <div className="category-page-content__articles-list">
             {allContentfulArticle.nodes.map(
               ({ id, title, category, URL, shortDescription, image }) => (
                 <div key={id} className="article-type">
@@ -46,11 +46,11 @@ const Blog = ({
               )
             )}
           </div>
-          <Paginate
-            pageCount={pageCount}
-            linkSuffix="blog"
-            currentPage={currentPage}
-          />
+          {/* <Paginate
+              pageCount={pageCount}
+              linkSuffix="blog"
+              currentPage={currentPage}
+            /> */}
         </div>
         <Aside
           categories={categoriesPostCount}
@@ -61,15 +61,15 @@ const Blog = ({
   </Fragment>
 );
 
-export default Blog;
+export default Category;
 
 export const data = graphql`
-  query($skip: Int!, $limit: Int!) {
+  query($category: String!) {
     allContentfulArticle(
       sort: { fields: publishDate, order: DESC }
-      skip: $skip
-      limit: $limit
+      filter: { category: { eq: $category } }
     ) {
+      totalCount
       nodes {
         URL
         title
