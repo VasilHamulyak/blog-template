@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-import { Link, graphql } from "gatsby";
-import Img from "gatsby-image";
+import { graphql } from "gatsby";
 
 import SEO from "components/Seo";
 // import Paginate from "components/Paginate";
 import Aside from "components/Aside";
 import Breadcrumb from "components/Breadcrumb";
+import Article from "components/Article";
 
 const Category = ({
   data: { allContentfulArticle, recentArticles },
@@ -28,21 +28,15 @@ const Category = ({
           <div className="category-page-content__articles-list">
             {allContentfulArticle.nodes.map(
               ({ id, title, category, URL, shortDescription, image }) => (
-                <div key={id} className="article-type">
-                  <Link to={`/blog/${URL}/`} className="article-type__image">
-                    <Img
-                      fluid={image.localFile.childImageSharp.fluid}
-                      alt={title}
-                    />
-                  </Link>
-                  <p className="article-type__categories">{category}</p>
-                  <Link to={`/blog/${URL}/`} className="article-type__title">
-                    <h3>{title}</h3>
-                  </Link>
-                  <p className="article-type__description">
-                    {shortDescription.shortDescription}
-                  </p>
-                </div>
+                <Article
+                  key={id}
+                  URL={URL}
+                  title={title}
+                  image={image}
+                  category={category}
+                  size="medium"
+                  shortDescription={shortDescription}
+                />
               )
             )}
           </div>

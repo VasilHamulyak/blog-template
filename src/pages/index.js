@@ -5,6 +5,7 @@ import cn from "classnames";
 
 import SEO from "../components/Seo";
 import Slider from "components/Slider";
+import Article from "components/Article";
 import { SOCIAL_LINKS } from "../constants";
 
 const IndexPage = ({ data }) => {
@@ -24,15 +25,15 @@ const IndexPage = ({ data }) => {
         <div className="recent-articles__wrapper">
           {recentArticles.nodes.map(
             ({ id, title, category, URL, publishDate, image }) => (
-              <Link key={id} to={`/blog/${URL}/`} className="article">
-                <p className="article__categories">{category}</p>
+              <Link key={id} to={`/blog/${URL}/`} className="recent-article">
+                <p className="recent-article__categories">{category}</p>
                 <Img
                   fluid={image.localFile.childImageSharp.fluid}
                   alt={title}
                 />
-                <div className="article__content">
-                  <h3 className="article__title">{title}</h3>
-                  <p className="article__date">{publishDate}</p>
+                <div className="recent-article__content">
+                  <h3 className="recent-article__title">{title}</h3>
+                  <p className="recent-article__date">{publishDate}</p>
                 </div>
               </Link>
             )
@@ -75,21 +76,15 @@ const IndexPage = ({ data }) => {
         <div className="popular-articles__wrapper">
           {recommendedArticles.nodes.map(
             ({ id, title, category, URL, shortDescription, image }) => (
-              <div key={id} className="article-type">
-                <Link to={`/blog/${URL}/`} className="article-type__image">
-                  <Img
-                    fluid={image.localFile.childImageSharp.fluid}
-                    alt={title}
-                  />
-                </Link>
-                <p className="article-type__categories">{category}</p>
-                <Link to={`/blog/${URL}/`} className="article-type__title">
-                  <h3>{title}</h3>
-                </Link>
-                <p className="article-type__description">
-                  {shortDescription.shortDescription}
-                </p>
-              </div>
+              <Article
+                key={id}
+                URL={URL}
+                title={title}
+                image={image}
+                category={category}
+                size="small"
+                shortDescription={shortDescription}
+              />
             )
           )}
         </div>
@@ -145,6 +140,7 @@ export const data = graphql`
             childImageSharp {
               fluid(
                 maxWidth: 538
+                maxHeight: 400
                 quality: 100
                 cropFocus: CENTER
                 srcSetBreakpoints: [320, 538]

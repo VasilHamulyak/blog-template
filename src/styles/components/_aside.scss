@@ -37,6 +37,7 @@
   }
 
   &__link {
+    @include flex(space-between);
     color: inherit;
     transition: color 0.3s;
 
@@ -44,8 +45,8 @@
       color: $vivid-orange-color;
     }
 
-    & > span {
-      margin-left: 5px;
+    :last-child {
+      letter-spacing: 2px;
     }
   }
 }

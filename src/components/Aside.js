@@ -17,8 +17,8 @@ const Aside = ({ categories, recentArticles }) => {
               to={`/category/${slugify(label)}/`}
               className="aside-categories__link"
             >
-              {label}
-              <span>{count}</span>
+              <span>{label}</span>
+              <span>({count})</span>
             </Link>
           </li>
         ))}

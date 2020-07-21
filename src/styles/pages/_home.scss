@@ -46,7 +46,7 @@
   }
 }
 
-.article {
+.recent-article {
   position: relative;
   flex-basis: 48%;
   margin-bottom: 30px;
@@ -72,8 +72,9 @@
   }
 
   &__content {
-    @include position(absolute, $bottom: 0, $left: 0);
+    @include position(absolute, $right: 0, $bottom: 0, $left: 0);
     width: 100%;
+    height: max-content;
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 20;
@@ -105,6 +106,7 @@
 
   &__title {
     @include font(18px, 24px, $white-color, 500);
+    @include truncate(2, 24px);
     margin-bottom: 5px;
   }
 
@@ -218,60 +220,5 @@
 
   &__wrapper {
     @include flex(space-between, $wrap: wrap);
-  }
-}
-
-.article-type {
-  flex: 0 32%;
-  margin-bottom: 30px;
-
-  &__image {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  &__categories {
-    @include font(16px, 18px, $vivid-orange-color, 400);
-    position: relative;
-    width: max-content;
-    margin: 0 auto;
-
-    &:before, &:after {
-      @include position(absolute, 43%);
-      content: '';
-      width: 25px;
-      height: 1px;
-      background-color: $vivid-orange-color;
-    }
-
-    &:before {
-      right: 120%;
-    }
-
-    &:after {
-      left: 120%;
-    }
-  }
-
-  &__title {
-    display: block;
-    height: 48px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    & > h3 {
-      @include font(18px, 24px, $dark-gray-color, 500);
-      text-align: center;
-      transition: color 0.3s ease-in-out;
-
-      @include hover-supported {
-        color: $vivid-orange-color;
-      }
-    }
-  }
-
-  &__description {
-    @include font(14px, 22px, $dark-gray-color, 400);
-    @include truncate(4, 22px);
   }
 }
