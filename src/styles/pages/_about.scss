@@ -1,0 +1,65 @@
+.about-page-authors {
+  @include create-wrapper(1200px, 50px auto);
+}
+
+.author {
+  display: flex;
+  margin-bottom: 40px;
+
+  &__email {
+    @include font(14px, 14px, $dark-gray-color, 600);
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  &__photo {
+    min-width: 200px;
+    margin-right: 40px;
+  }
+
+  &__fullName {
+    @include font(24px, 26px, $dark-color, 600);
+    margin-bottom: 20px;
+  }
+
+  &__information {
+    @include font(14px, 20px, $dark-gray-color);
+  }
+}
+
+.author-follow-me {
+  @include flex(center);
+  margin: 10px 0;
+
+  &__item {
+    @include flex(center, center);
+    color: $dark-gray-color;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+  
+    &--linkedin {
+      @include hover-supported {
+        color: $white-color;
+        background-color: $linkedin-color;
+      }
+    }
+  
+    &--facebook {
+      @include hover-supported {
+        color: $white-color;
+        background-color: $facebook-color;
+      }
+    }
+  
+    &--instagram {
+      @include hover-supported {
+        color: $white-color;
+        background-color: $instagram-color;
+      }
+    }
+  }
+}

@@ -59,13 +59,6 @@ function Post({ data }) {
           />
         </div>
       </section>
-      <section className="post-image">
-        <Img
-          fluid={image.localFile.childImageSharp.fluid}
-          alt={title}
-          style={{ width: "100%" }}
-        />
-      </section>
       <section className="post-header">
         <h1 className="post-header__title">{title}</h1>
         <div className="post-header__date-author">
@@ -73,6 +66,13 @@ function Post({ data }) {
           <span>by</span>
           {author.fullName}
         </div>
+      </section>
+      <section className="post-image">
+        <Img
+          fluid={image.localFile.childImageSharp.fluid}
+          alt={title}
+          style={{ width: "100%" }}
+        />
       </section>
       <section className="post-content">
         {documentToReactComponents(content.json, options)}
@@ -100,7 +100,7 @@ export const data = graphql`
           childImageSharp {
             fluid(
               maxWidth: 1200
-              maxHeight: 500
+              maxHeight: 600
               quality: 100
               cropFocus: CENTER
               srcSetBreakpoints: [320, 1200]

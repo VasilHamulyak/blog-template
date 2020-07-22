@@ -14,7 +14,7 @@
 }
 
 .post-image {
-  @include create-wrapper(1200px, 80px auto 40px);
+  @include create-wrapper(1200px, 40px auto 40px);
 }
 
 .post-header {
@@ -75,7 +75,7 @@
   }
 
   ul {
-    @include font(16px, 24px, $dark-gray-color, normal);
+    @include font(16px, 24px, $dark-gray-color);
     margin: 32px 0 -10px 30px;
 
     li {
@@ -93,7 +93,7 @@
   }
 
   ol {
-    @include font(16px, 24px, $dark-gray-color, normal);
+    @include font(16px, 24px, $dark-gray-color);
     margin: 32px 0 -10px 30px;
 
     li {
@@ -117,9 +117,15 @@
 
   blockquote {
     border-left: 3px solid $vivid-orange-color;
-    font-style: italic;
     margin: 40px 0;
     padding: 0 30px;
+
+    & > p {
+      font-size: 22px;
+      line-height: 30px;
+      font-style: italic;
+      padding: 10px 0;
+    }
   }
 }
 
