@@ -7,7 +7,7 @@
   margin-bottom: 40px;
 
   &__email {
-    @include font(14px, 14px, $dark-gray-color, 600);
+    @include font(14px, 14px, $dark-gray-color, 400);
     text-align: center;
     margin: 10px 0;
   }

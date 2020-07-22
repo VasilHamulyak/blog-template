@@ -11,6 +11,7 @@ module.exports = {
     title: "Blog example",
     description: "Blog website example created on Gatsby and Strapi",
     author: "Vasyl Khamuliak <vasyl.hamulyak@gmail.com>",
+    siteUrl: process.env.SITE_URL,
   },
   plugins: [
     "gatsby-plugin-react-helmet",

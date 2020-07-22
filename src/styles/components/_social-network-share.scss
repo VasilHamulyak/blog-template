@@ -1,0 +1,15 @@
+.share-icon {
+  @include flex(center, center);
+  color: $dark-gray-color;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  padding: 5px;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+  cursor: pointer;
+
+  @include hover-supported {
+    background-color: $gray-color;
+  }
+}

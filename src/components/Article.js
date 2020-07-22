@@ -17,7 +17,11 @@ const Article = ({ size, URL, title, image, category, shortDescription }) => (
     <Link to={`/blog/${URL}/`} className="article__title">
       <h3>{title}</h3>
     </Link>
-    <p className="article__description">{shortDescription.shortDescription}</p>
+    {shortDescription && (
+      <p className="article__description">
+        {shortDescription.shortDescription}
+      </p>
+    )}
   </article>
 );
 

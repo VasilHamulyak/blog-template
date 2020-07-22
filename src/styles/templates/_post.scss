@@ -39,44 +39,44 @@
 .post-content {
   @include create-wrapper(816px, 0 auto 80px);
 
-  h1 {
+  & > h1 {
     @include font(32px, 40px, $dark-color, 500);
     margin-top: 36px;
     margin-bottom: -10px;
   }
 
-  h2 {
+  & > h2 {
     @include font(24px, 30px, $dark-color, 500);
     margin-top: 36px;
     margin-bottom: -10px;
   }
 
-  h3 {
+  & > h3 {
     @include font(20px, 26px, $dark-color, 500);
     margin-top: 36px;
     margin-bottom: -10px;
   }
 
-  p {
+  & > p {
     @include font(16px, 26px, $dark-gray-color);
     margin: 32px 0 -10px 0;
   }
 
-  h1 + p {
+  & > h1 + p {
     margin-top: 20px;
   }
 
-  h2 + p {
+  & > h2 + p {
     margin-top: 20px;
   }
 
-  h3 + p {
+  & > h3 + p {
     margin-top: 20px;
   }
 
-  ul {
+  & > ul {
     @include font(16px, 24px, $dark-gray-color);
-    margin: 32px 0 -10px 30px;
+    margin: 32px 0 -10px 40px;
 
     li {
       list-style-type: disc;
@@ -88,13 +88,13 @@
     }
   }
 
-  p + ul {
+  & > p + ul {
     margin-top: 20px;
   }
 
-  ol {
+  & > ol {
     @include font(16px, 24px, $dark-gray-color);
-    margin: 32px 0 -10px 30px;
+    margin: 32px 0 -10px 40px;
 
     li {
       list-style-type: decimal;
@@ -106,7 +106,7 @@
     }
   }
 
-  p + ol {
+  & > p + ol {
     margin-top: 20px;
   }
 
@@ -115,7 +115,7 @@
     color: inherit;
   }
 
-  blockquote {
+  & > blockquote {
     border-left: 3px solid $vivid-orange-color;
     margin: 40px 0;
     padding: 0 30px;
@@ -126,6 +126,11 @@
       font-style: italic;
       padding: 10px 0;
     }
+  }
+
+  &__share-links {
+    @include flex(flex-end);
+    margin-top: 30px;
   }
 }
 
@@ -145,6 +150,10 @@
   }
 }
 
-.embedded-entry {
-  margin-top: 56px;
+.post-related {
+  @include create-wrapper(1200px, 60px auto);
+
+  &__articles {
+    @include flex(space-between, $wrap: wrap);
+  }
 }
