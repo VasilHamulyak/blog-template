@@ -43,15 +43,15 @@ exports.createPages = async ({ actions, graphql }) => {
       })
     );
 
-    const pageCount = Math.ceil(articlesCount / 4);
+    const pageCount = Math.ceil(articlesCount / 10);
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       return createPage({
         path: i === 0 ? "/blog/" : `/blog/${i + 1}/`,
         component: path.resolve("src/templates/Blog.js"),
         context: {
-          skip: 4 * i,
-          limit: 4,
+          skip: 10 * i,
+          limit: 10,
           pageCount,
           currentPage: i + 1,
           categoriesPostCount,

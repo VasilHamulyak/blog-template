@@ -4,7 +4,7 @@ import cn from "classnames";
 
 function Paginate({ pageCount, linkSuffix, currentPage }) {
   const nextPage = pageCount === currentPage ? pageCount : currentPage + 1;
-  const prevPage = pageCount <= 2 ? "" : currentPage - 1;
+  const prevPage = currentPage <= 2 ? "" : currentPage - 1;
 
   return (
     <div className="paginate">

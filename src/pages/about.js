@@ -30,6 +30,7 @@ const AboutPage = ({ data }) => {
               id,
               fullName,
               photo,
+              categories,
               information,
               instagramURL,
               linkedinURL,
@@ -90,6 +91,12 @@ const AboutPage = ({ data }) => {
                   <p className="author__information">
                     {information.information}
                   </p>
+                  <div className="author__categories">
+                    <span>Categories:</span>
+                    <div className="author__categoriesList">
+                      {categories.join(", ")}
+                    </div>
+                  </div>
                 </div>
               </div>
             )
@@ -121,6 +128,7 @@ export const data = graphql`
         linkedinURL
         facebookURL
         email
+        categories
         information {
           information
         }

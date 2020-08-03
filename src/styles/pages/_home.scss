@@ -107,11 +107,12 @@
   &__title {
     @include font(18px, 24px, $white-color, 500);
     @include truncate(2, 24px);
+    height: 48px;
     margin-bottom: 5px;
   }
 
   &__date {
-    @include font(14px, 14px, $white-color, 400);
+    @include font(13px, 13px, $white-color, 400);
   }
 }
 

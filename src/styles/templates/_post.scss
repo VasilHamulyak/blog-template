@@ -47,13 +47,19 @@
 
   & > h2 {
     @include font(24px, 30px, $dark-color, 500);
-    margin-top: 36px;
+    margin-top: 32px;
     margin-bottom: -10px;
   }
 
   & > h3 {
     @include font(20px, 26px, $dark-color, 500);
-    margin-top: 36px;
+    margin-top: 28px;
+    margin-bottom: -10px;
+  }
+
+  & > h4 {
+    @include font(18px, 24px, $dark-color, 500);
+    margin-top: 24px;
     margin-bottom: -10px;
   }
 
@@ -71,6 +77,10 @@
   }
 
   & > h3 + p {
+    margin-top: 20px;
+  }
+
+  & > h4 + p {
     margin-top: 20px;
   }
 

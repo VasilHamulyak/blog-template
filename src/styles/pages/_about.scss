@@ -25,6 +25,20 @@
   &__information {
     @include font(14px, 20px, $dark-gray-color);
   }
+
+  &__categories {
+    @include flex($align: center);
+    margin-top: 10px;
+
+    & > span {
+      @include font(16px, 18px, $dark-color, 600);
+      margin-right: 10px;
+    }
+  }
+
+  &__categoriesList {
+    @include font(14px, 16px, $dark-gray-color, 400);
+  }
 }
 
 .author-follow-me {
