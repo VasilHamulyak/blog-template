@@ -95,7 +95,7 @@
   }
 
   &__date-author {
-    @include font(12px, 12px, $dark-gray-color, 300);
+    @include font(12px, 16px, $dark-gray-color, 300);
 
     & > span {
       font-style: italic;

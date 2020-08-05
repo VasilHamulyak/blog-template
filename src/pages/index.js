@@ -26,7 +26,7 @@ const IndexPage = ({ data }) => {
     if (EMAIL_REGEX.test(emailInputValue)) {
       setIsLoading(true);
 
-      const timer = Math.ceil(Math.random() * 3);
+      const timer = Math.ceil(Math.random() * 2);
       return new Promise(resolve => {
         setTimeout(() => {
           resolve("Sent");

@@ -15,11 +15,19 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-react-helmet",
+    "gatsby-transformer-json",
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "assets",
         path: `${__dirname}/src/assets`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "content",
+        path: `${__dirname}/src/content`,
       },
     },
     "gatsby-transformer-sharp",

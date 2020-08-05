@@ -1,3 +1,6 @@
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+
 @import "./normalize";
 @import "./common";
 @import "./icons";
@@ -12,6 +15,7 @@
 /* import pages */
 @import "./pages/home";
 @import "./pages/about";
+@import "./pages/contact";
 
 /* import templates */
 @import "./templates/blog";
