@@ -1,0 +1,39 @@
+.dialog {
+  @include position(fixed, 0, 0, 0, 0);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 300;
+
+  &__close {
+    @include position(absolute, 10px, 10px);
+    @include flex(center, center);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    @include hover-supported {
+      background-color: $gray-color;
+    }
+  }
+
+  &__icon {
+    font-size: 24px;
+  }
+
+  &__content {
+    position: relative;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin: 200px auto 0;
+    padding: 40px 30px;
+    background-color: $white-color;
+
+    & > i {
+      display: block;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+  }
+}

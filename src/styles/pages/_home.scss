@@ -152,6 +152,12 @@
     &:focus {
       border-bottom-color: $vivid-orange-color;
     }
+
+    &--error {
+      border-width: 2px;
+      border-bottom-color: #EB5757;
+      background-color: #eb575734;
+    }
   }
 
   &__submit-button {

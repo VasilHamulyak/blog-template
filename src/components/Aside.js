@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
 import cn from "classnames";
 import Img from "gatsby-image";
 
-import { SOCIAL_LINKS } from "../constants";
+import Dialog from "components/Dialog";
+import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
 import { slugify } from "../shared/slugify";
 
 const Aside = ({ categories, recentArticles }) => {
+  const [emailInputValue, setEmailInputValue] = useState("");
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const onInputChange = value => {
+    emailInputError && setEmailInputError(false);
+    setEmailInputValue(value);
+  };
+
+  const submitForm = event => {
+    event.preventDefault();
+    if (EMAIL_REGEX.test(emailInputValue)) {
+      setIsLoading(true);
+
+      const timer = Math.ceil(Math.random() * 3);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve("Sent");
+        }, timer * 1000);
+      }).then(_ => {
+        setIsDialogOpen(true);
+        setEmailInputValue("");
+        setIsLoading(false);
+      });
+    } else {
+      setEmailInputError(true);
+    }
+  };
+
   return (
     <aside className="aside">
       <ul className="aside-categories">
@@ -66,10 +97,28 @@ const Aside = ({ categories, recentArticles }) => {
       </div>
       <div className="aside-subscribe">
         <form className="aside-subscribe__form">
-          <input type="email" className="aside-subscribe__input" />
-          <button className="aside-subscribe__submit-button">Subscribe</button>
+          <input
+            type="email"
+            className={cn("aside-subscribe__input", {
+              "aside-subscribe__input--error": emailInputError,
+            })}
+            value={emailInputValue}
+            onChange={event => onInputChange(event.target.value)}
+          />
+          <button
+            className="aside-subscribe__submit-button"
+            onClick={submitForm}
+            disabled={isLoading}
+          >
+            Subscribe
+          </button>
         </form>
       </div>
+      <Dialog isOpen={isDialogOpen} onCloseClick={() => setIsDialogOpen(false)}>
+        <i className="icon-paper-plane" />
+        <div>Now you subscribed for the latest news from our blog</div>
+        <div>Don't forget to check your email</div>
+      </Dialog>
     </aside>
   );
 };

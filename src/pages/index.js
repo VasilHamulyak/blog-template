@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import cn from "classnames";
@@ -6,10 +6,41 @@ import cn from "classnames";
 import SEO from "../components/Seo";
 import Slider from "components/Slider";
 import Article from "components/Article";
-import { SOCIAL_LINKS } from "../constants";
+import Dialog from "components/Dialog";
+import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
 
 const IndexPage = ({ data }) => {
   const { sliderArticles, recentArticles, recommendedArticles } = data;
+  const [emailInputValue, setEmailInputValue] = useState("");
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const onInputChange = value => {
+    emailInputError && setEmailInputError(false);
+    setEmailInputValue(value);
+  };
+
+  const submitForm = event => {
+    event.preventDefault();
+    if (EMAIL_REGEX.test(emailInputValue)) {
+      setIsLoading(true);
+
+      const timer = Math.ceil(Math.random() * 3);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve("Sent");
+        }, timer * 1000);
+      }).then(_ => {
+        setIsDialogOpen(true);
+        setEmailInputValue("");
+        setIsLoading(false);
+      });
+    } else {
+      setEmailInputError(true);
+    }
+  };
+
   return (
     <Fragment>
       <SEO title="Home" />
@@ -48,8 +79,21 @@ const IndexPage = ({ data }) => {
             miss out!
           </h3>
           <form className="subscribes__form">
-            <input type="email" className="subscribes__input" />
-            <button className="subscribes__submit-button">Submit</button>
+            <input
+              type="email"
+              className={cn("subscribes__input", {
+                "subscribes__input--error": emailInputError,
+              })}
+              value={emailInputValue}
+              onChange={event => onInputChange(event.target.value)}
+            />
+            <button
+              className="subscribes__submit-button"
+              onClick={submitForm}
+              disabled={isLoading}
+            >
+              Submit
+            </button>
           </form>
           <div className="subscribes__social-networks">
             {SOCIAL_LINKS.map(({ name, icon, link }) => (
@@ -89,6 +133,11 @@ const IndexPage = ({ data }) => {
           )}
         </div>
       </section>
+      <Dialog isOpen={isDialogOpen} onCloseClick={() => setIsDialogOpen(false)}>
+        <i className="icon-paper-plane" />
+        <div>Now you subscribed for the latest news from our blog</div>
+        <div>Don't forget to check your email</div>
+      </Dialog>
     </Fragment>
   );
 };

@@ -173,6 +173,12 @@
     &:focus {
       border-color: $vivid-orange-color;
     }
+
+    &--error {
+      outline: 1px solid #EB5757;
+      border-color: #EB5757;
+      background-color: #eb575734;
+    }
   }
 
   &__submit-button {
