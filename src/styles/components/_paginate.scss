@@ -7,7 +7,7 @@
     margin: 0 auto;
   }
 
-  &__item {
+  &__item, &__break {
     width: 30px;
     height: 30px;
     margin: 3px;
@@ -16,6 +16,16 @@
       opacity: 0.5;
       pointer-events: none;
     }
+  }
+
+  &__break {
+    @include flex(center, center);
+    @include font(16px, 16px, $dark-gray-color, 600);
+    background-color: $gray-color;
+  }
+
+  &__item-prev, &__item-next {
+    width: 50px;
   }
 
   &__link {

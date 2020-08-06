@@ -6,6 +6,8 @@ import cn from "classnames";
 import SEO from "../components/Seo";
 import Breadcrumb from "components/Breadcrumb";
 
+import Paginate from "components/Paginate";
+
 const AboutPage = ({ data }) => {
   const { allContentfulAuthor } = data;
   return (
