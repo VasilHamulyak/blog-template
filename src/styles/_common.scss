@@ -10,16 +10,26 @@ main {
 /* used for style titles */
 .section-title {
   @include flex(center);
-  margin-bottom: 80px;
+  margin-bottom: 60px;
+
+  @include screen-sm {
+    margin-bottom: 80px;
+  }
 
   &--mb-small {
     margin-bottom: 40px;
   }
 
   & > h2 {
-    @include font(30px, 40px, $dark-gray-color, 700);
+    @include font(24px, 30px, $dark-gray-color, 700);
+    text-align: center;
     position: relative;
     width: max-content;
+
+    @include screen-xs {
+      font-size: 30px;
+      line-height: 40px;
+    }
 
     &:before, &:after {
       @include position(absolute, $right: 0, $left: 0);
@@ -43,6 +53,7 @@ main {
 
   & > h3 {
     @include font(24px, 32px, $dark-gray-color, 700);
+    text-align: center;
     position: relative;
     width: max-content;
 

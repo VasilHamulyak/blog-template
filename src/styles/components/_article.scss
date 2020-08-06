@@ -2,7 +2,15 @@
   margin-bottom: 40px;
 
   &--small {
-    flex: 0 32%;
+    flex: 0 100%;
+
+    @include screen-xs {
+      flex: 0 48%;
+    }
+
+    @include screen-sm {
+      flex: 0 32%;
+    }
   }
 
   &--medium {

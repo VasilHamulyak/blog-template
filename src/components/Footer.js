@@ -13,52 +13,38 @@ const Footer = () => (
           <span>Style</span>
         </Link>
         <nav className="footer-navigation">
-          <ul className="footer-navigation__list">
-            <li className="footer-navigation__item">
-              <Link to="/category/travel/" className="footer-navigation__link">
-                Travel
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/category/health/" className="footer-navigation__link">
-                Health
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/category/food/" className="footer-navigation__link">
-                Food
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/category/fitness/" className="footer-navigation__link">
-                Fitness
-              </Link>
-            </li>
-          </ul>
+          <Link to="/category/travel/" className="footer-navigation__link">
+            Travel
+          </Link>
+
+          <Link to="/category/health/" className="footer-navigation__link">
+            Health
+          </Link>
+
+          <Link to="/category/food/" className="footer-navigation__link">
+            Food
+          </Link>
+
+          <Link to="/category/fitness/" className="footer-navigation__link">
+            Fitness
+          </Link>
         </nav>
         <nav className="footer-navigation">
-          <ul className="footer-navigation__list">
-            <li className="footer-navigation__item">
-              <Link to="/" className="footer-navigation__link">
-                Home
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/blog/" className="footer-navigation__link">
-                Blog
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/about/" className="footer-navigation__link">
-                About
-              </Link>
-            </li>
-            <li className="footer-navigation__item">
-              <Link to="/contact/" className="footer-navigation__link">
-                Contact
-              </Link>
-            </li>
-          </ul>
+          <Link to="/" className="footer-navigation__link">
+            Home
+          </Link>
+
+          <Link to="/blog/" className="footer-navigation__link">
+            Blog
+          </Link>
+
+          <Link to="/about/" className="footer-navigation__link">
+            About
+          </Link>
+
+          <Link to="/contact/" className="footer-navigation__link">
+            Contact
+          </Link>
         </nav>
       </div>
       <div className="footer__bottom">

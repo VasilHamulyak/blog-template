@@ -9,7 +9,7 @@ import Article from "components/Article";
 import Dialog from "components/Dialog";
 import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
 
-const IndexPage = ({ data }) => {
+const HomePage = ({ data }) => {
   const { sliderArticles, recentArticles, recommendedArticles } = data;
   const [emailInputValue, setEmailInputValue] = useState("");
   const [emailInputError, setEmailInputError] = useState(false);
@@ -142,7 +142,7 @@ const IndexPage = ({ data }) => {
   );
 };
 
-export default IndexPage;
+export default HomePage;
 
 export const data = graphql`
   query {
@@ -161,7 +161,7 @@ export const data = graphql`
             childImageSharp {
               fluid(
                 maxWidth: 1200
-                maxHeight: 600
+                maxHeight: 700
                 quality: 100
                 cropFocus: CENTER
                 srcSetBreakpoints: [320, 768, 992, 1200]

@@ -30,7 +30,12 @@
 }
 
 .navigation {
+  display: none;
   height: inherit;
+
+  @include screen-md {
+    display: block;
+  }
 
   &__list {
     @include flex();
