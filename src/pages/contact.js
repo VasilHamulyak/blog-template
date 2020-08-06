@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import cn from "classnames";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
@@ -6,6 +6,7 @@ import Slider from "react-slick";
 
 import SEO from "../components/Seo";
 import Breadcrumb from "components/Breadcrumb";
+import Dialog from "components/Dialog";
 import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
 
 const NextArrow = ({ onClick }) => (
@@ -22,8 +23,58 @@ const PrevArrow = ({ onClick }) => (
 
 const ContactPage = ({ data }) => {
   const { contentJson, image } = data;
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [emailInputHasError, setEmailInputHasError] = useState(false);
+  const [nameInputHasError, setNameInputHasError] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const settings = {
+  const onInputChange = event => {
+    const { name, value } = event.target;
+    emailInputHasError && setEmailInputHasError(false);
+    nameInputHasError && setNameInputHasError(false);
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    let isFormValid = true;
+
+    if (formValues.name.trim() === "") {
+      isFormValid = false;
+      setNameInputHasError(true);
+    }
+
+    if (!EMAIL_REGEX.test(formValues.email)) {
+      isFormValid = false;
+      setEmailInputHasError(true);
+    }
+
+    if (isFormValid) {
+      const timer = Math.ceil(Math.random() * 2);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve("Sent");
+        }, timer * 1000);
+      }).then(() => {
+        setIsDialogOpen(true);
+        setFormValues({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setIsLoading(false);
+      });
+    }
+  };
+
+  const SLIDER_SETTINGS = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -37,9 +88,9 @@ const ContactPage = ({ data }) => {
   return (
     <Fragment>
       <SEO title="Contact Us" />
-      <section className="post-banner">
-        <div className="post-banner__wrapper">
-          <h1 className="post-banner__title">Contact Us</h1>
+      <section className="banner">
+        <div className="banner__wrapper">
+          <h1 className="banner__title">Contact Us</h1>
           <Breadcrumb
             pathArr={[{ path: "/", label: "Home" }]}
             crumbLabel="Contact"
@@ -103,26 +154,46 @@ const ContactPage = ({ data }) => {
             </div>
             <fieldset>
               <input
+                name="name"
                 type="text"
-                className="contact-page-form__input"
-                placeholder="Name"
+                value={formValues?.name}
+                className={cn("contact-page-form__input", {
+                  "contact-page-form__input--error": nameInputHasError,
+                })}
+                placeholder="Name*"
+                onChange={onInputChange}
               />
               <input
+                name="email"
                 type="email"
-                className="contact-page-form__input"
-                placeholder="Email"
+                value={formValues?.email}
+                className={cn("contact-page-form__input", {
+                  "contact-page-form__input--error": emailInputHasError,
+                })}
+                placeholder="Email*"
+                onChange={onInputChange}
               />
               <input
+                name="phone"
                 type="phone"
+                value={formValues?.phone}
                 className="contact-page-form__input"
                 placeholder="Phone"
+                onChange={onInputChange}
               />
               <textarea
+                name="message"
+                value={formValues?.message}
                 className="contact-page-form__textarea"
                 placeholder="Message"
+                onChange={onInputChange}
               ></textarea>
             </fieldset>
-            <button className="contact-page-form__submit-button">
+            <button
+              className="contact-page-form__submit-button"
+              onClick={onSubmit}
+              disabled={isLoading}
+            >
               Get in touch
             </button>
           </form>
@@ -132,7 +203,7 @@ const ContactPage = ({ data }) => {
         <div className="section-title">
           <h2>Latest from our Instagram</h2>
         </div>
-        <Slider {...settings}>
+        <Slider {...SLIDER_SETTINGS}>
           {contentJson.list.map(({ id, link, likes, comments, image }) => (
             <div key={id} className="contact-page-slide-item">
               <a
@@ -157,6 +228,11 @@ const ContactPage = ({ data }) => {
           ))}
         </Slider>
       </section>
+      <Dialog isOpen={isDialogOpen} onCloseClick={() => setIsDialogOpen(false)}>
+        <i className="icon-paper-plane" />
+        <div>Successfully sent!</div>
+        <div>Thanks for your visit. We contact you in the closest time.</div>
+      </Dialog>
     </Fragment>
   );
 };

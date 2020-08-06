@@ -13,9 +13,9 @@ const Blog = ({
 }) => (
   <Fragment>
     <SEO title="Home" />
-    <section className="blog-page-banner">
-      <div className="blog-page-banner__wrapper">
-        <h1 className="blog-page-banner__title">Our Blog</h1>
+    <section className="banner">
+      <div className="banner__wrapper">
+        <h1 className="banner__title">Our Blog</h1>
         <Breadcrumb
           pathArr={[{ path: "/", label: "Home" }]}
           crumbLabel="Blog"

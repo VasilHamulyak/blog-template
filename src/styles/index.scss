@@ -1,16 +1,16 @@
 @import "~slick-carousel/slick/slick.css"; 
 @import "~slick-carousel/slick/slick-theme.css";
 
-@import "./normalize";
-@import "./common";
-@import "./icons";
-
 /* import settings */
 @import "./settings/colors";
 @import "./settings/z-indexes";
 
 /* import tools */
 @import "./tools/mixins";
+
+@import "./normalize";
+@import "./common";
+@import "./icons";
 
 /* import pages */
 @import "./pages/home";

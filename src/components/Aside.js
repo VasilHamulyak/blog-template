@@ -28,7 +28,7 @@ const Aside = ({ categories, recentArticles }) => {
         setTimeout(() => {
           resolve("Sent");
         }, timer * 1000);
-      }).then(_ => {
+      }).then(() => {
         setIsDialogOpen(true);
         setEmailInputValue("");
         setIsLoading(false);

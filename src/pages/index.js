@@ -31,7 +31,7 @@ const IndexPage = ({ data }) => {
         setTimeout(() => {
           resolve("Sent");
         }, timer * 1000);
-      }).then(_ => {
+      }).then(() => {
         setIsDialogOpen(true);
         setEmailInputValue("");
         setIsLoading(false);
@@ -44,8 +44,8 @@ const IndexPage = ({ data }) => {
   return (
     <Fragment>
       <SEO title="Home" />
-      <section className="banner">
-        <div className="banner__wrapper">
+      <section className="home-banner">
+        <div className="home-banner__wrapper">
           <Slider slideList={sliderArticles.nodes} />
         </div>
       </section>

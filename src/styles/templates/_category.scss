@@ -1,18 +1,3 @@
-.category-page-banner {
-  height: 150px;
-  background-color: $dark-cyan-color;
-
-  &__wrapper {
-    @include create-wrapper(1200px, 0 auto);
-    @include flex(space-between, center);
-    height: inherit;
-  }
-
-  &__title {
-    @include font(30px, 30px, $white-color, 600);
-  }
-}
-
 .category-page-content {
   @include create-wrapper(1200px, 60px auto);
 

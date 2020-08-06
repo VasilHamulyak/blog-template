@@ -64,9 +64,9 @@ function Post({ data }) {
   return (
     <Fragment>
       <SEO title="Home" />
-      <section className="post-banner">
-        <div className="post-banner__wrapper">
-          <h1 className="post-banner__title">{category}</h1>
+      <section className="banner">
+        <div className="banner__wrapper">
+          <h1 className="banner__title">{category}</h1>
           <Breadcrumb
             pathArr={[
               { path: "/", label: "Home" },
