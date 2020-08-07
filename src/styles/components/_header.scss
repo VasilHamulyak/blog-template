@@ -31,25 +31,17 @@
 
 .navigation {
   display: none;
-  height: inherit;
 
-  @include screen-md {
-    display: block;
-  }
-
-  &__list {
+  @include screen-sm {
     @include flex();
     height: inherit;
-  }
-
-  &__item {
-    margin: 0 10px;
   }
 
   &__link {
     @include font(16px, 16px, $dark-gray-color, 600);
     @include flex($align: center);
     height: 100%;
+    margin: 0 10px;
     padding: 0 15px;
     border-bottom: 3px solid transparent;
 

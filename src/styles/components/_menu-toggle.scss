@@ -1,0 +1,43 @@
+.toggle {
+  @include position(absolute, 0, 10px, 0);
+  width: 48px;
+  height: 40px;
+  margin: auto;
+  padding: 10px;
+  z-index: $z-index-menu-toggle;
+  cursor: pointer;
+
+  @include screen-sm {
+    display: none;
+  }
+
+  &__bar {
+    width: 28px;
+    height: 3px;
+    background-color: $dark-cyan-color;
+    margin-bottom: 6px;
+    transition: all 0.3s ease-in-out;
+
+    &--third {
+      margin-bottom: 0;
+    }
+  }
+ 
+  &--drawer-open {  
+    .toggle__bar {
+      margin-bottom: 0;
+  
+      &.toggle__bar--first {
+        transform: translate(0, 8px) rotate(45deg);
+      }
+  
+      &.toggle__bar--second {
+        transform: translate(0, 5px) rotate(-45deg);
+      }
+  
+      &.toggle__bar--third {
+        display: none;
+      }
+    }
+  }
+}

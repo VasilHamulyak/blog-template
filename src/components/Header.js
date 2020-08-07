@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { Link } from "gatsby";
 
+import Drawer from "./Drawer";
+import MenuToggle from "./MenuToggle";
+import Backdrop from "./Backdrop";
+
 const Header = () => {
   const [isScrollDown, setIsScrollDown] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -25,47 +30,48 @@ const Header = () => {
           <span>Style</span>
         </Link>
         <nav className="navigation">
-          <ul className="navigation__list">
-            <li className="navigation__item">
-              <Link
-                to="/"
-                className="navigation__link"
-                activeClassName="navigation__link--is-active"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="navigation__item">
-              <Link
-                to="/blog/"
-                partiallyActive
-                className="navigation__link"
-                activeClassName="navigation__link--is-active"
-              >
-                Blog
-              </Link>
-            </li>
-            <li className="navigation__item">
-              <Link
-                to="/about/"
-                className="navigation__link"
-                activeClassName="navigation__link--is-active"
-              >
-                About
-              </Link>
-            </li>
-            <li className="navigation__item">
-              <Link
-                to="/contact/"
-                className="navigation__link"
-                activeClassName="navigation__link--is-active"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+          <Link
+            to="/"
+            className="navigation__link"
+            activeClassName="navigation__link--is-active"
+          >
+            Home
+          </Link>
+          <Link
+            to="/blog/"
+            partiallyActive
+            className="navigation__link"
+            activeClassName="navigation__link--is-active"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/about/"
+            className="navigation__link"
+            activeClassName="navigation__link--is-active"
+          >
+            About
+          </Link>
+          <Link
+            to="/contact/"
+            className="navigation__link"
+            activeClassName="navigation__link--is-active"
+          >
+            Contact
+          </Link>
         </nav>
       </div>
+      <MenuToggle
+        isDrawerOpen={isDrawerOpen}
+        onToggleClick={() => setIsDrawerOpen(!isDrawerOpen)}
+      />
+      <Drawer
+        isDrawerOpen={isDrawerOpen}
+        onDrawerClick={() => setIsDrawerOpen(false)}
+      />
+      {isDrawerOpen && (
+        <Backdrop onBackdropClick={() => setIsDrawerOpen(false)} />
+      )}
     </header>
   );
 };

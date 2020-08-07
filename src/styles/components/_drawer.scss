@@ -1,0 +1,47 @@
+.drawer {
+  @include position(fixed, 0, 0, 0);
+  width: 280px;
+  transform: translateX(300px);
+  background-color: $white-color;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in;
+  z-index: $z-index-drawer;
+
+  &--is-open {
+    transform: translateX(0);
+  }
+
+  @include screen-sm {
+    display: none;
+  }
+
+  &__logo {
+    display: block;
+    margin: 38px 0 0 30px;
+
+    @include screen-xs {
+      display: none;
+    }
+  }
+
+  &__nav {
+    @include flex($align: center, $direction: column);
+    margin-top: 30px;
+
+    @include screen-xs {
+      margin-top: 70px;
+    }
+  }
+
+  &__link {
+    @include font(18px, 18px, $dark-gray-color, 600);
+    @include flex(center, center);
+    width: max-content;
+    height: 60px;
+    border-bottom: 3px solid transparent;
+
+    &--is-active {
+      border-bottom-color: $vivid-orange-color;
+    }
+  }
+}
