@@ -1,18 +1,26 @@
 .category-page-content {
-  @include create-wrapper(1200px, 60px auto);
+  @include create-wrapper(1200px, 40px auto);
+
+  @include screen-sm {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
 
   &__wrapper {
-    @include flex(space-between);
+    @include flex(space-between, $direction: column);
+
+    @include screen-sm {
+      flex-direction: row;
+    }
   }
 
   &__articles-list {
     @include flex(space-between, $wrap: wrap);
     align-content: flex-start;
     max-width: 850px;
-    margin-right: 30px;
 
-    .article-type {
-      flex: 0 48%;
+    @include screen-sm {
+      margin-right: 30px;
     }
   }
 }

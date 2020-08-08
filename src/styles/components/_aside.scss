@@ -1,35 +1,50 @@
 .aside {
-  min-width: 220px;
-  width: 220px;
+  width: 100%;
+  margin-top: 60px;
+
+  @include screen-sm {
+    min-width: 220px;
+    width: 220px;
+    margin-top: 0;
+  }
+}
+
+.aside-title {
+  @include font(18px, 18px, $dark-color, 500);
+  position: relative;
+  width: max-content;
+  margin: 0 auto 40px;
+
+  @include screen-sm {
+    margin: 0 0 28px;
+  }
+
+  &:before, &:after {
+    @include position(absolute, $right: 0, $left: 0);
+    content: '';
+    background-color: $vivid-orange-color;
+    margin: 0 auto;
+
+    @include screen-sm {
+      margin: 0;
+    }
+  }
+
+  &:before {
+    bottom: -10px;
+    width: 60%;
+    height: 2px;
+  }
+
+  &:after {
+    bottom: -14px;
+    width: 40%;
+    height: 1px;
+  }
 }
 
 .aside-categories {
   margin-bottom: 60px;
-
-  &__title {
-    @include font(18px, 18px, $dark-color, 500);
-    position: relative;
-    width: max-content;
-    margin-bottom: 28px;
-
-    &:before, &:after {
-      @include position(absolute, $right: 0, $left: 0);
-      content: '';
-      background-color: $vivid-orange-color;
-    }
-
-    &:before {
-      bottom: -10px;
-      width: 60%;
-      height: 2px;
-    }
-
-    &:after {
-      bottom: -14px;
-      width: 40%;
-      height: 1px;
-    }
-  }
 
   &__item {
     @include font(14px, 14px, $dark-gray-color, 400);
@@ -52,46 +67,38 @@
 }
 
 .aside-recent-post {
+  @include flex($direction: column);
   margin-bottom: 40px;
 
-  &__title {
-    @include font(18px, 18px, $dark-color, 500);
-    position: relative;
-    width: max-content;
-    margin-bottom: 28px;
-
-    &:before, &:after {
-      @include position(absolute, $right: 0, $left: 0);
-      content: '';
-      background-color: $vivid-orange-color;
-    }
-
-    &:before {
-      bottom: -10px;
-      width: 60%;
-      height: 2px;
-    }
-
-    &:after {
-      bottom: -14px;
-      width: 40%;
-      height: 1px;
-    }
+  &__image {
+    flex-basis: 30%;
   }
 
   &__item {
+    @include flex(space-between);
     margin-bottom: 30px;
+
+    @include screen-sm {
+      flex-direction: column;
+    }
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
+  &__content {
+    flex-basis: 65%;
+  }
+
   &__link {
     @include font(18px, 22px, $dark-gray-color, 500);
     @include truncate(2, 22px);
-    margin-top: 10px;
     margin-bottom: 10px;
+
+    @include screen-sm {
+      margin-top: 10px;
+    }
   }
 
   &__date-author {
@@ -106,8 +113,12 @@
 }
 
 .aside-follow-us {
-  @include flex(space-between);
+  @include flex(center);
   margin: 0 -5px 40px;
+
+  @include screen-sm {
+    justify-content: space-between;
+  }
 
   &__item {
     @include flex(center, center);

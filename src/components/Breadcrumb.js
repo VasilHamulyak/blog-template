@@ -12,7 +12,9 @@ const Breadcrumb = ({ pathArr, crumbLabel }) => {
           <span className="breadcrumb__divider">/</span>
         </Fragment>
       ))}
-      <span className="breadcrumb__item">{crumbLabel}</span>
+      <span className="breadcrumb__item breadcrumb__item--current">
+        {crumbLabel}
+      </span>
     </div>
   );
 };

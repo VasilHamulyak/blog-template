@@ -1,8 +1,16 @@
 .breadcrumb {
-  @include font(14px, 14px, $white-color, 400);
+  @include font(14px, 20px, $white-color, 400);
   
   &__item {
     color: inherit;
+
+    @include hover-supported {
+      color: $vivid-orange-color;
+    }
+
+    &--current {
+      color: $white-color !important;
+    }
   }
 
   &__divider {

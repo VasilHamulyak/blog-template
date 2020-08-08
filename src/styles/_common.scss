@@ -55,8 +55,17 @@ main {
 
   &__wrapper {
     @include create-wrapper(1200px, 0 auto);
-    @include flex(space-between, center);
+    @include flex(space-between, $direction: column);
     height: inherit;
+    padding-top: 26px;
+    padding-bottom: 36px;
+
+    @include screen-sm {
+      flex-direction: row;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   &__title {

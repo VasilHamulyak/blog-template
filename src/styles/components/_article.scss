@@ -14,7 +14,11 @@
   }
 
   &--medium {
-    flex: 0 48%;
+    flex: 0 100%;
+
+    @include screen-xs {
+      flex: 0 48%;
+    }
   }
 
   &__image {

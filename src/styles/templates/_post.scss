@@ -22,7 +22,11 @@
 }
 
 .post-content {
-  @include create-wrapper(816px, 0 auto 80px);
+  @include create-wrapper(816px, 0 auto 40px);
+
+  @include screen-sm {
+    margin: 0 auto 80px;
+  }
 
   & > h1 {
     @include font(32px, 40px, $dark-color, 500);
@@ -112,14 +116,22 @@
 
   & > blockquote {
     border-left: 3px solid $vivid-orange-color;
-    margin: 40px 0;
+    margin: 20px 0;
     padding: 0 30px;
 
+    @include screen-sm {
+      margin: 40px 0;
+    }
+
     & > p {
-      font-size: 22px;
-      line-height: 30px;
+      @include font(16px, 22px, $dark-color, 500);
       font-style: italic;
       padding: 10px 0;
+
+      @include screen-sm {
+        font-size: 22px;
+        line-height: 30px;
+      }
     }
   }
 
@@ -146,7 +158,11 @@
 }
 
 .post-related {
-  @include create-wrapper(1200px, 60px auto);
+  @include create-wrapper(1200px, 60px auto 0);
+
+  @include screen-sm {
+    margin: 60px auto;
+  }
 
   &__articles {
     @include flex(space-between, $wrap: wrap);

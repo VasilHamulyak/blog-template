@@ -41,7 +41,7 @@ const Aside = ({ categories, recentArticles }) => {
   return (
     <aside className="aside">
       <ul className="aside-categories">
-        <li className="aside-categories__title">Gategories</li>
+        <li className="aside-title">Gategories</li>
         {categories.map(({ label, count }) => (
           <li className="aside-categories__item" key={label}>
             <Link
@@ -55,17 +55,17 @@ const Aside = ({ categories, recentArticles }) => {
         ))}
       </ul>
       <ul className="aside-recent-post">
-        <li className="aside-recent-post__title">Recent post</li>
+        <li className="aside-title">Recent post</li>
         {recentArticles.nodes.map(
           ({ id, title, URL, publishDate, author, image }) => (
             <li key={id} className="aside-recent-post__item">
-              <Link to={`/blog/${URL}/`}>
+              <Link to={`/blog/${URL}/`} className="aside-recent-post__image">
                 <Img
                   fluid={image.localFile.childImageSharp.fluid}
                   alt={title}
                 />
               </Link>
-              <div>
+              <div className="aside-recent-post__content">
                 <Link to={`/blog/${URL}/`} className="aside-recent-post__link">
                   {title}
                 </Link>

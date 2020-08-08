@@ -66,7 +66,7 @@ function Post({ data }) {
       <SEO title="Home" />
       <section className="banner">
         <div className="banner__wrapper">
-          <h1 className="banner__title">{category}</h1>
+          <h1 className="banner__title">Post</h1>
           <Breadcrumb
             pathArr={[
               { path: "/", label: "Home" },
