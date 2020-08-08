@@ -1,18 +1,82 @@
 .contact-page-image {
-  @include create-wrapper(1200px, 60px auto);
+  @include create-wrapper(1200px, 20px auto 40px);
+
+  @include screen-sm {
+    margin-top: 60px;
+  }
+}
+
+.contact-page-title {
+  @include flex(center);
+  margin-bottom: 40px;
+
+  @include screen-sm {
+    justify-content: flex-start;
+  }
+
+  & > h3 {
+    @include font(24px, 32px, $dark-gray-color, 700);
+    text-align: center;
+    position: relative;
+    width: max-content;
+
+    &:before, &:after {
+      @include position(absolute, $right: 0, $left: 0);
+      content: '';
+      margin: 0 auto;
+      background-color: $vivid-orange-color;
+
+      @include screen-sm {
+        margin: 0 auto 0 0;
+      }
+    }
+
+    &:before {
+      bottom: -4px;
+      width: 50%;
+      height: 2px;
+    }
+
+    &:after {
+      bottom: -12px;
+      width: 30%;
+      height: 1px;
+    }
+  }
 }
 
 .contact-page-content {
-  @include create-wrapper(1200px, 60px auto);
-  @include flex();
+  @include create-wrapper(1200px, 20px auto);
+  @include flex($direction: column-reverse);
+
+  @include screen-sm {
+    flex-direction: row;
+    margin: 60px auto;
+  }
 
   &__wrapper {
-    flex: 0 50%;
+    flex: 0 100%;
+
+    &:first-child {
+      margin-top: 60px;
+    }
+
+    @include screen-sm {
+      flex: 0 50%;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
 .contact-page-instagram-news-feed {
-  @include create-wrapper(1200px, 100px auto 60px);
+  @include create-wrapper(1200px, 0 auto 60px);
+
+  @include screen-sm {
+    margin: 100px auto 60px;
+  }
 }
 
 .contact-page-information {
@@ -32,8 +96,12 @@
 }
 
 .contact-page-follow-us {
-  @include flex();
+  @include flex(center);
   margin: 0 -5px 40px;
+
+  @include screen-sm {
+    justify-content: flex-start;
+  }
 
   &__item {
     @include flex(center, center);
@@ -123,12 +191,17 @@
 
   &__submit-button {
     @include font(16px, 16px, $white-color, 500);
+    display: block;
     width: 200px;
     height: 40px;
-    margin-top: 20px;
+    margin: 20px auto 0;
     padding: 0 20px;
     background-color: $vivid-orange-color;
     cursor: pointer;
+
+    @include screen-sm {
+      margin: 20px 0 0;
+    }
   }
 }
 

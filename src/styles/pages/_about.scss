@@ -3,8 +3,12 @@
 }
 
 .author {
-  display: flex;
+  @include flex($direction: column);
   margin-bottom: 40px;
+
+  @include screen-sm {
+    flex-direction: row;
+  }
 
   &__email {
     @include font(14px, 14px, $dark-gray-color, 400);
@@ -13,13 +17,22 @@
   }
 
   &__photo {
+    @include flex($align: center, $direction: column);
     min-width: 200px;
-    margin-right: 40px;
+
+    @include screen-sm {
+      margin-right: 40px;
+    }
   }
 
   &__fullName {
     @include font(24px, 26px, $dark-color, 600);
     margin-bottom: 20px;
+    text-align: center;
+
+    @include screen-sm {
+      text-align: left;
+    }
   }
 
   &__information {

@@ -83,6 +83,15 @@ const ContactPage = ({ data }) => {
     autoplay: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
   };
 
   return (
@@ -103,7 +112,7 @@ const ContactPage = ({ data }) => {
       <section className="contact-page-content">
         <div className="contact-page-content__wrapper">
           <div className="contact-page-information">
-            <div className="section-title section-title--left section-title--mb-small">
+            <div className="contact-page-title">
               <h3>Our Location</h3>
             </div>
             <div className="contact-page-information__item">
@@ -126,7 +135,7 @@ const ContactPage = ({ data }) => {
             </div>
           </div>
           <div>
-            <div className="section-title section-title--left section-title--mb-small">
+            <div className="contact-page-title">
               <h3>Follow Us</h3>
             </div>
             <div className="contact-page-follow-us">
@@ -149,7 +158,7 @@ const ContactPage = ({ data }) => {
         </div>
         <div className="contact-page-content__wrapper">
           <form className="contact-page-form">
-            <div className="section-title section-title--left section-title--mb-small">
+            <div className="contact-page-title">
               <h3>Contact Us</h3>
             </div>
             <fieldset>
