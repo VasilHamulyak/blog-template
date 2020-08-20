@@ -1,16 +1,23 @@
+/* eslint-disable camelcase */
 import React, { Fragment, useState } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import cn from "classnames";
+import { GatsbySeo } from "gatsby-plugin-next-seo";
 
-import SEO from "../components/Seo";
 import Slider from "components/Slider";
 import Article from "components/Article";
 import Dialog from "components/Dialog";
 import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
 
 const HomePage = ({ data }) => {
-  const { sliderArticles, recentArticles, recommendedArticles } = data;
+  const {
+    site,
+    sliderArticles,
+    recentArticles,
+    recommendedArticles,
+    sharedImage,
+  } = data;
   const [emailInputValue, setEmailInputValue] = useState("");
   const [emailInputError, setEmailInputError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +50,25 @@ const HomePage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO title="Home" />
+      <GatsbySeo
+        title="Home"
+        description={site.siteMetadata.description}
+        openGraph={{
+          url: site.siteMetadata.siteUrl,
+          title: "Home",
+          description: site.siteMetadata.description,
+          images: [
+            {
+              url:
+                site.siteMetadata.siteUrl +
+                sharedImage.childImageSharp.resize.src,
+              width: sharedImage.childImageSharp.resize.width,
+              height: sharedImage.childImageSharp.resize.height,
+              alt: "Life Style Blog",
+            },
+          ],
+        }}
+      />
       <section className="home-banner">
         <div className="home-banner__wrapper">
           <Slider slideList={sliderArticles.nodes} />
@@ -146,6 +171,13 @@ export default HomePage;
 
 export const data = graphql`
   query {
+    site {
+      siteMetadata {
+        siteUrl
+        description
+        author
+      }
+    }
     sliderArticles: allContentfulArticle(
       filter: { addToHomeSlider: { eq: true } }
     ) {
@@ -227,6 +259,15 @@ export const data = graphql`
               }
             }
           }
+        }
+      }
+    }
+    sharedImage: file(relativePath: { eq: "shared-images/home-page.jpg" }) {
+      childImageSharp {
+        resize(width: 1200, height: 600, quality: 100) {
+          width
+          src
+          height
         }
       }
     }

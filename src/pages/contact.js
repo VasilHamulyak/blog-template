@@ -3,8 +3,8 @@ import cn from "classnames";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Slider from "react-slick";
+import { GatsbySeo } from "gatsby-plugin-next-seo";
 
-import SEO from "../components/Seo";
 import Breadcrumb from "components/Breadcrumb";
 import Dialog from "components/Dialog";
 import { SOCIAL_LINKS, EMAIL_REGEX } from "../constants";
@@ -22,7 +22,7 @@ const PrevArrow = ({ onClick }) => (
 );
 
 const ContactPage = ({ data }) => {
-  const { contentJson, image } = data;
+  const { site, contentJson, image, sharedImage } = data;
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -96,7 +96,25 @@ const ContactPage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO title="Contact Us" />
+      <GatsbySeo
+        title="Contact Us"
+        description={site.siteMetadata.description}
+        openGraph={{
+          url: site.siteMetadata.siteUrl + "/contact/",
+          title: "Contact Us",
+          description: site.siteMetadata.description,
+          images: [
+            {
+              url:
+                site.siteMetadata.siteUrl +
+                sharedImage.childImageSharp.resize.src,
+              width: sharedImage.childImageSharp.resize.width,
+              height: sharedImage.childImageSharp.resize.height,
+              alt: "Life Style Blog",
+            },
+          ],
+        }}
+      />
       <section className="banner">
         <div className="banner__wrapper">
           <h1 className="banner__title">Contact Us</h1>
@@ -250,7 +268,13 @@ export default ContactPage;
 
 export const data = graphql`
   query {
-    contentJson(id: { eq: "istagram" }) {
+    site {
+      siteMetadata {
+        siteUrl
+        description
+      }
+    }
+    contentJson(id: { eq: "instagram" }) {
       list {
         id
         comments
@@ -280,6 +304,15 @@ export const data = graphql`
           srcSetBreakpoints: [1200]
         ) {
           ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    sharedImage: file(relativePath: { eq: "shared-images/home-page.jpg" }) {
+      childImageSharp {
+        resize(width: 1200, height: 600, quality: 100) {
+          width
+          src
+          height
         }
       }
     }

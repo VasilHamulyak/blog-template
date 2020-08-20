@@ -9,12 +9,11 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Blog example",
-    description: "Blog website example created on Gatsby and Strapi",
+    description: "Blog website example created by Gatsby and Contentful",
     author: "Vasyl Khamuliak <vasyl.hamulyak@gmail.com>",
     siteUrl: process.env.SITE_URL,
   },
   plugins: [
-    "gatsby-plugin-react-helmet",
     "gatsby-transformer-json",
     {
       resolve: "gatsby-source-filesystem",
@@ -33,6 +32,23 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     "gatsby-plugin-catch-links",
+    "gatsby-plugin-advanced-sitemap",
+    {
+      resolve: "gatsby-plugin-next-seo",
+      options: {
+        openGraph: {
+          type: "website",
+          locale: "en",
+          url: process.env.SITE_URL,
+          site_name: "LifeStyle",
+        },
+        twitter: {
+          handle: "@Vasyl48506826",
+          site: "@Vasyl48506826",
+          cardType: "summary_large_image",
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-sass",
       options: {
@@ -71,19 +87,31 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: "gatsby-plugin-canonical-urls",
       options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
-        start_url: "/",
-        background_color: "#663399",
-        theme_color: "#663399",
-        display: "minimal-ui",
-        icon: "src/assets/gatsby-icon.png", // This path is relative to the root of the site.
+        siteUrl: process.env.SITE_URL,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: process.env.SITE_URL,
+        sitemap: process.env.SITE_URL + "/sitemap.xml",
+        policy: [{ userAgent: "*", disallow: "/" }],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "LifeStyle",
+        short_name: "LS",
+        start_url: "/",
+        background_color: "#18b0b0",
+        theme_color: "#18b0b0",
+        display: "minimal-ui",
+        icon: "src/assets/favicon.png", // This path is relative to the root of the site.
+      },
+    },
     "gatsby-plugin-offline",
   ],
 };

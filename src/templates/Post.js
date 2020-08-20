@@ -3,26 +3,35 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { GatsbySeo, ArticleJsonLd } from "gatsby-plugin-next-seo";
 
 import useContentfulAsset from "../hooks/useContentfulAsset";
-import SEO from "components/Seo";
 import Breadcrumb from "components/Breadcrumb";
 import Article from "components/Article";
 import SocialNetworkShare from "components/SocialNetworkShare";
+import { transformRobotsToBoolean } from "../shared/utils";
 import { SOCIAL_LINKS } from "../constants";
 
 function Post({ data }) {
   const {
-    author,
-    URL,
-    title,
-    content,
-    category,
-    publishDate,
-    image,
-    interestingForYou,
-  } = data.contentfulArticle;
+    site,
+    contentfulArticle: {
+      author,
+      URL,
+      title,
+      robots,
+      category,
+      content,
+      shortDescription,
+      formattedPublishDate,
+      publishDate,
+      updatedAt,
+      image,
+      interestingForYou,
+    },
+  } = data;
 
+  const { noindex, nofollow } = transformRobotsToBoolean(robots);
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {
@@ -63,7 +72,48 @@ function Post({ data }) {
 
   return (
     <Fragment>
-      <SEO title="Home" />
+      <GatsbySeo
+        title="Home"
+        description={shortDescription.shortDescription}
+        noindex={noindex}
+        nofollow={nofollow}
+        openGraph={{
+          url: site.siteMetadata.siteUrl + "/blog/" + URL + "/",
+          title: "About",
+          description: shortDescription.shortDescription,
+          type: "article",
+          article: {
+            publishedTime: publishDate,
+            modifiedTime: updatedAt,
+            authors: [author.fullName],
+            tags: [category],
+          },
+          images: [
+            {
+              url: site.siteMetadata.siteUrl + image.localFile.publicURL,
+              width: 1200,
+              height: 600,
+              alt: "Life Style Blog",
+            },
+          ],
+        }}
+      />
+      <ArticleJsonLd
+        url={site.siteMetadata.siteUrl + "/blog/" + URL + "/"}
+        headline="Article headline"
+        images={[site.siteMetadata.siteUrl + image.localFile.publicURL]}
+        datePublished={publishDate}
+        dateModified={updatedAt}
+        authorName={author.fullName}
+        publisherName={author.fullName}
+        publisherLogo={
+          site.siteMetadata.siteUrl + author.photo.localFile.publicURL
+        }
+        description={shortDescription.shortDescription}
+        overrides={{
+          "@type": "BlogPosting",
+        }}
+      />
       <section className="banner">
         <div className="banner__wrapper">
           <h1 className="banner__title">Post</h1>
@@ -79,7 +129,7 @@ function Post({ data }) {
       <section className="post-header">
         <h1 className="post-header__title">{title}</h1>
         <div className="post-header__date-author">
-          {publishDate}
+          {formattedPublishDate}
           <span>by</span>
           {author.fullName}
         </div>
@@ -131,19 +181,36 @@ export default Post;
 
 export const data = graphql`
   query($postId: String!) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
     contentfulArticle(id: { eq: $postId }) {
       author {
         fullName
+        photo {
+          localFile {
+            publicURL
+          }
+        }
       }
       URL
       category
       content {
         json
       }
+      shortDescription {
+        shortDescription
+      }
       title
-      publishDate(formatString: "DD MMM YYYY")
+      robots
+      formattedPublishDate: publishDate(formatString: "DD MMM YYYY")
+      publishDate
+      updatedAt
       image {
         localFile {
+          publicURL
           childImageSharp {
             fluid(
               maxWidth: 1200
@@ -173,6 +240,11 @@ export const data = graphql`
                 srcSetBreakpoints: [320, 358]
               ) {
                 ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+              resize(width: 1200, height: 600, quality: 100) {
+                width
+                src
+                height
               }
             }
           }

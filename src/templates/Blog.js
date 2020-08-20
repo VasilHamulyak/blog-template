@@ -1,18 +1,36 @@
 import React, { Fragment } from "react";
 import { graphql } from "gatsby";
+import { GatsbySeo } from "gatsby-plugin-next-seo";
 
-import SEO from "components/Seo";
 import Paginate from "components/Paginate";
 import Aside from "components/Aside";
 import Breadcrumb from "components/Breadcrumb";
 import Article from "components/Article";
 
 const Blog = ({
-  data: { allContentfulArticle, recentArticles },
+  data: { site, allContentfulArticle, recentArticles, sharedImage },
   pageContext: { pageCount, currentPage, categoriesPostCount },
 }) => (
   <Fragment>
-    <SEO title="Home" />
+    <GatsbySeo
+      title="Blog"
+      description={site.siteMetadata.description}
+      openGraph={{
+        url: site.siteMetadata.siteUrl + "/blog/",
+        title: "Blog",
+        description: site.siteMetadata.description,
+        images: [
+          {
+            url:
+              site.siteMetadata.siteUrl +
+              sharedImage.childImageSharp.resize.src,
+            width: sharedImage.childImageSharp.resize.width,
+            height: sharedImage.childImageSharp.resize.height,
+            alt: "Life Style Blog",
+          },
+        ],
+      }}
+    />
     <section className="banner">
       <div className="banner__wrapper">
         <h1 className="banner__title">Our Blog</h1>
@@ -59,6 +77,12 @@ export default Blog;
 
 export const data = graphql`
   query($skip: Int!, $limit: Int!) {
+    site {
+      siteMetadata {
+        siteUrl
+        description
+      }
+    }
     allContentfulArticle(
       sort: { fields: publishDate, order: DESC }
       skip: $skip
@@ -116,6 +140,15 @@ export const data = graphql`
               }
             }
           }
+        }
+      }
+    }
+    sharedImage: file(relativePath: { eq: "shared-images/blog-page.jpg" }) {
+      childImageSharp {
+        resize(width: 1200, height: 600, quality: 100) {
+          width
+          src
+          height
         }
       }
     }

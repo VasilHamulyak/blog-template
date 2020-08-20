@@ -2,15 +2,33 @@ import React, { Fragment } from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import cn from "classnames";
+import { GatsbySeo } from "gatsby-plugin-next-seo";
 
-import SEO from "../components/Seo";
 import Breadcrumb from "components/Breadcrumb";
 
 const AboutPage = ({ data }) => {
-  const { allContentfulAuthor } = data;
+  const { site, allContentfulAuthor, sharedImage } = data;
   return (
     <Fragment>
-      <SEO title="About" />
+      <GatsbySeo
+        title="About"
+        description={site.siteMetadata.description}
+        openGraph={{
+          url: site.siteMetadata.siteUrl + "/about/",
+          title: "About",
+          description: site.siteMetadata.description,
+          images: [
+            {
+              url:
+                site.siteMetadata.siteUrl +
+                sharedImage.childImageSharp.resize.src,
+              width: sharedImage.childImageSharp.resize.width,
+              height: sharedImage.childImageSharp.resize.height,
+              alt: "Life Style Blog",
+            },
+          ],
+        }}
+      />
       <section className="banner">
         <div className="banner__wrapper">
           <h1 className="banner__title">About</h1>
@@ -111,6 +129,12 @@ export default AboutPage;
 
 export const data = graphql`
   query {
+    site {
+      siteMetadata {
+        siteUrl
+        description
+      }
+    }
     allContentfulAuthor {
       nodes {
         fullName
@@ -131,6 +155,15 @@ export const data = graphql`
         categories
         information {
           information
+        }
+      }
+    }
+    sharedImage: file(relativePath: { eq: "shared-images/about-page.jpg" }) {
+      childImageSharp {
+        resize(width: 1200, height: 600, quality: 100) {
+          width
+          src
+          height
         }
       }
     }
