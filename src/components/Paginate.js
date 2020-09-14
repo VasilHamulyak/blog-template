@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import cn from "classnames";
 
-const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
+const Paginate = ({ pageCount, pathPrefix, currentPage }) => {
   const nextPage = pageCount === currentPage ? pageCount : currentPage + 1;
   const prevPage = currentPage <= 2 ? "" : currentPage - 1;
 
@@ -15,7 +15,7 @@ const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
           })}
         >
           <Link
-            to={`/${linkSuffix}/${prevPage !== "" ? prevPage + "/" : ""}`}
+            to={`/${pathPrefix}/${prevPage !== "" ? prevPage + "/" : ""}`}
             className="paginate__link  paginate__link--prev"
           >
             Prev
@@ -27,7 +27,7 @@ const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
             return (
               <li key={i} className="paginate__item">
                 <Link
-                  to={i === 0 ? `/${linkSuffix}/` : `/${linkSuffix}/${i + 1}/`}
+                  to={i === 0 ? `/${pathPrefix}/` : `/${pathPrefix}/${i + 1}/`}
                   className="paginate__link"
                   activeClassName="paginate__link--is-active"
                 >
@@ -43,7 +43,7 @@ const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
             return (
               <li key={i} className="paginate__item">
                 <Link
-                  to={i === 0 ? `/${linkSuffix}/` : `/${linkSuffix}/${i + 1}/`}
+                  to={i === 0 ? `/${pathPrefix}/` : `/${pathPrefix}/${i + 1}/`}
                   className="paginate__link"
                   activeClassName="paginate__link--is-active"
                 >
@@ -60,7 +60,7 @@ const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
             return (
               <li key={i} className="paginate__item">
                 <Link
-                  to={i === 0 ? `/${linkSuffix}/` : `/${linkSuffix}/${i + 1}/`}
+                  to={i === 0 ? `/${pathPrefix}/` : `/${pathPrefix}/${i + 1}/`}
                   className="paginate__link"
                   activeClassName="paginate__link--is-active"
                 >
@@ -86,7 +86,7 @@ const Paginate = ({ pageCount, linkSuffix, currentPage }) => {
           })}
         >
           <Link
-            to={`/${linkSuffix}/${nextPage}/`}
+            to={`/${pathPrefix}/${nextPage}/`}
             className="paginate__link paginate__link--next"
           >
             Next

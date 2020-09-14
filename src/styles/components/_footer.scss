@@ -46,11 +46,11 @@
 
 .footer-navigation {
   @include flex(space-between, $align: flex-end, $direction: column);
-  min-width: 200px;
   width: 200px;
 
   @include screen-xs {
     align-items: flex-start;
+    min-width: 200px;
   }
 
   &:nth-child(2) {

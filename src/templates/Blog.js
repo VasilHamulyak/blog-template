@@ -9,7 +9,7 @@ import Article from "components/Article";
 
 const Blog = ({
   data: { site, allContentfulArticle, recentArticles, sharedImage },
-  pageContext: { pageCount, currentPage, categoriesPostCount },
+  pageContext: { numberOfPages, pageNumber: currentPage, categoriesPostCount },
 }) => (
   <Fragment>
     <GatsbySeo
@@ -59,9 +59,9 @@ const Blog = ({
             )}
           </div>
           <Paginate
-            pageCount={pageCount}
-            linkSuffix="blog"
-            currentPage={currentPage}
+            pageCount={numberOfPages}
+            pathPrefix="blog"
+            currentPage={currentPage + 1}
           />
         </div>
         <Aside

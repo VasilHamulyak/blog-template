@@ -1,4 +1,4 @@
-/* mixin for Open Sans font-family */
+/* mixin for font */
 @mixin font($font-size, $line-height, $color, $font-weight: 400) {
   font-size: $font-size;
   line-height: $line-height;

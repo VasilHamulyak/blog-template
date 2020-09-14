@@ -1,5 +1,6 @@
 const path = require("path");
 const { slugify } = require("./src/shared/slugify");
+const { paginate } = require("gatsby-awesome-pagination");
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -18,23 +19,31 @@ exports.createPages = async ({ actions, graphql }) => {
   `).then(res => {
     if (res.errors) return Promise.reject(res.errors);
 
-    const articlesCount = res.data.allContentfulArticle.totalCount;
-
     const posts = res.data.allContentfulArticle.nodes;
 
-    const categories = posts.map(({ category }) => category);
-
+    // created an object with each category count
     const categoriesPostCount = Object.entries(
-      categories.reduce((categories, category) => {
+      posts.reduce((categories, { category }) => {
         categories[category] = categories[category] || 0;
         categories[category] = categories[category] + 1;
         return categories;
       }, {})
     ).map(([label, count]) => ({ label, count }));
 
-    categories.forEach(category =>
-      createPage({
-        path: `/category/${slugify(category)}/`,
+    // sorted posts by category
+    const postSortByCategory = posts.reduce((acc, { id, category }) => {
+      acc[category] = acc[category] || [];
+      acc[category] = acc[category].concat(id);
+      return acc;
+    }, {});
+
+    // create paginated pages for each category
+    Object.keys(postSortByCategory).forEach(category =>
+      paginate({
+        createPage,
+        items: postSortByCategory[category],
+        itemsPerPage: 10,
+        pathPrefix: `/category/${slugify(category)}`,
         component: path.resolve("src/templates/Category.js"),
         context: {
           category,
@@ -43,22 +52,19 @@ exports.createPages = async ({ actions, graphql }) => {
       })
     );
 
-    const pageCount = Math.ceil(articlesCount / 10);
-
-    Array.from({ length: pageCount }).forEach((_, i) => {
-      return createPage({
-        path: i === 0 ? "/blog/" : `/blog/${i + 1}/`,
-        component: path.resolve("src/templates/Blog.js"),
-        context: {
-          skip: 10 * i,
-          limit: 10,
-          pageCount,
-          currentPage: i + 1,
-          categoriesPostCount,
-        },
-      });
+    // create paginated pages for blog
+    paginate({
+      createPage,
+      items: posts,
+      itemsPerPage: 10,
+      pathPrefix: "/blog",
+      component: path.resolve("src/templates/Blog.js"),
+      context: {
+        categoriesPostCount,
+      },
     });
 
+    // created pages for each article
     posts.forEach(({ id, URL }) =>
       createPage({
         path: `/blog/${URL}/`,

@@ -2,14 +2,20 @@ import React, { Fragment } from "react";
 import { graphql } from "gatsby";
 import { GatsbySeo } from "gatsby-plugin-next-seo";
 
-// import Paginate from "components/Paginate";
+import Paginate from "components/Paginate";
 import Aside from "components/Aside";
 import Breadcrumb from "components/Breadcrumb";
 import Article from "components/Article";
+import { slugify } from "../shared/slugify";
 
 const Category = ({
   data: { site, allContentfulArticle, recentArticles, sharedImage },
-  pageContext: { category, categoriesPostCount },
+  pageContext: {
+    numberOfPages,
+    pageNumber: currentPage,
+    category,
+    categoriesPostCount,
+  },
 }) => (
   <Fragment>
     <GatsbySeo
@@ -58,11 +64,11 @@ const Category = ({
               )
             )}
           </div>
-          {/* <Paginate
-              pageCount={pageCount}
-              linkSuffix="blog"
-              currentPage={currentPage}
-            /> */}
+          <Paginate
+            pageCount={numberOfPages}
+            pathPrefix={`category/${slugify(category)}`}
+            currentPage={currentPage + 1}
+          />
         </div>
         <Aside
           categories={categoriesPostCount}
@@ -76,7 +82,7 @@ const Category = ({
 export default Category;
 
 export const data = graphql`
-  query($category: String!) {
+  query($category: String!, $skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         siteUrl
@@ -86,6 +92,8 @@ export const data = graphql`
     allContentfulArticle(
       sort: { fields: publishDate, order: DESC }
       filter: { category: { eq: $category } }
+      skip: $skip
+      limit: $limit
     ) {
       totalCount
       nodes {
