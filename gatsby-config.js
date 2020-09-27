@@ -33,6 +33,7 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-catch-links",
     "gatsby-plugin-advanced-sitemap",
+    "gatsby-plugin-force-trailing-slashes",
     {
       resolve: "gatsby-plugin-next-seo",
       options: {

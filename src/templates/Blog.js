@@ -10,13 +10,14 @@ import Article from "components/Article";
 const Blog = ({
   data: { site, allContentfulArticle, recentArticles, sharedImage },
   pageContext: { numberOfPages, pageNumber: currentPage, categoriesPostCount },
+  location: { pathname },
 }) => (
   <Fragment>
     <GatsbySeo
       title="Blog"
       description={site.siteMetadata.description}
       openGraph={{
-        url: site.siteMetadata.siteUrl + "/blog/",
+        url: site.siteMetadata.siteUrl + pathname,
         title: "Blog",
         description: site.siteMetadata.description,
         images: [

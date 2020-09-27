@@ -16,13 +16,14 @@ const Category = ({
     category,
     categoriesPostCount,
   },
+  location: { pathname },
 }) => (
   <Fragment>
     <GatsbySeo
       title={`${category} category`}
       description={site.siteMetadata.description}
       openGraph={{
-        url: site.siteMetadata.siteUrl + `/category/${category.toLowerCase()}/`,
+        url: site.siteMetadata.siteUrl + pathname,
         title: `${category} category`,
         description: site.siteMetadata.description,
         images: [
